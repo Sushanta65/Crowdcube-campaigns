@@ -3,7 +3,7 @@ import { AuthContext } from "../provider/AuthProvider";
 import { Link } from "react-router-dom";
 
 const SignUp = () => {
-    const {createNewUser, users} = useContext(AuthContext)
+    const {createNewUser, users, signInWithGoogle} = useContext(AuthContext)
     
     const handleSingUp = (event) => {
         event.preventDefault()
@@ -38,6 +38,8 @@ const SignUp = () => {
             <input className="w-3/6 py-2 px-3" type="password" placeholder="Password" name="password" />
           </label>
           <input className="btn" type="submit" value='Sign Up' />
+          <div className="divider"></div>
+          <button onClick={signInWithGoogle} className="btn">Sign Up With Google</button>
           <span>Already Have an Account? <Link to='/login'>Login</Link></span>
         </form>
       </div>

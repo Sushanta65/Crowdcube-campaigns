@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 const Login = () => {
 
-    const {loginUser} = useContext(AuthContext)
+    const {loginUser, signInWithGoogle} = useContext(AuthContext)
 
     const handleLogin = (event) => {
         event.preventDefault()
@@ -42,6 +42,8 @@ const Login = () => {
           />
         </label>
         <input className="btn" type="submit" value="Login" />
+        <div className="divider"></div>
+        <button className="btn" onClick={signInWithGoogle}>Login With Google</button>
         <span>New User? <Link to='/signUp'>Sign Up</Link></span>
       </form>
     </div>
