@@ -1,15 +1,21 @@
-import { useContext } from 'react';
-import { AuthContext } from '../provider/AuthProvider';
+import { Outlet } from "react-router-dom";
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 
 const MainLayout = () => {
-    const {name, age} = useContext(AuthContext)
-
-    return (
-        <div>
-            {name}
-            {age}
-        </div>
-    );
+  return (
+    <>
+      <section>
+        <Navbar></Navbar>
+      </section>
+      <section className="w-4/5 mx-auto">
+        <Outlet></Outlet>
+      </section>
+      <section>
+        <Footer></Footer>
+      </section>
+    </>
+  );
 };
 
 export default MainLayout;
