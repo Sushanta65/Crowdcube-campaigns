@@ -17,12 +17,12 @@ const Navbar = () => {
       <li>
         <Link to="/addNewCampaign">Add New Campaign</Link>
       </li>
-      <li>
+     {user?.email &&  <> <li>
         <Link to="/myCampaign">My Campaign</Link>
       </li>
       <li>
         <Link to="/myDonation">My Donations</Link>
-      </li>
+      </li></>}
       {user? <></>: <><li>
         <Link to="/login">Login</Link>
       </li>

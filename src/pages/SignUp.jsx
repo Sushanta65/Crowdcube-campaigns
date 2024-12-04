@@ -1,5 +1,6 @@
 import { useContext } from "react";
 import { AuthContext } from "../provider/AuthProvider";
+import { Link } from "react-router-dom";
 
 const SignUp = () => {
     const {createNewUser, users} = useContext(AuthContext)
@@ -37,6 +38,7 @@ const SignUp = () => {
             <input className="w-3/6 py-2 px-3" type="password" placeholder="Password" name="password" />
           </label>
           <input className="btn" type="submit" value='Sign Up' />
+          <span>Already Have an Account? <Link to='/login'>Login</Link></span>
         </form>
       </div>
     </div>
