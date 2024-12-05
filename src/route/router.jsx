@@ -4,6 +4,7 @@ import SignUp from "../pages/SignUp";
 import Login from "../pages/Login";
 import AddNewCampaign from "../pages/AddNewCampaign";
 import PrivateRoute from "./privateRoute";
+import AllCampaign from "../pages/AllCampaign";
 
 
 const router = createBrowserRouter([
@@ -22,6 +23,10 @@ const router = createBrowserRouter([
             {
                 path: '/addNewCampaign',
                 element: <PrivateRoute><AddNewCampaign></AddNewCampaign></PrivateRoute>
+            },
+            {
+                path: '/campaigns',
+                element: <AllCampaign></AllCampaign>
             }
         ]
     }

@@ -38,6 +38,19 @@ const {user} = useContext(AuthContext)
       name
     }
     console.log(campaign)
+
+    fetch('http://localhost:5000/campaigns',{
+      method: 'POST',
+      headers: {
+        'content-type' : 'application/json'
+      },
+      body: JSON.stringify(campaign)
+    })
+    .then(res => res.json())
+    .then(data => {
+      console.log(data)
+      form.reset()
+    })
   }
 
   return (
@@ -48,28 +61,28 @@ const {user} = useContext(AuthContext)
       </div>
       <form onSubmit={handleAddCampaign}>
       <label className="input input-bordered flex items-center gap-5">
-            <input className="w-3/6 py-2 px-3" type="url" placeholder="Thumnail Url" name="thumnailUrl" />
+            <input className="w-3/6 py-2 px-3" required type="url" placeholder="Thumnail Url" name="thumnailUrl" />
           </label>
           <label className="input input-bordered flex items-center gap-2">
-            <input className="w-3/6 py-2 px-3" type="text" placeholder="Campaign Title" name="campaignTitle" />
+            <input className="w-3/6 py-2 px-3" required type="text" placeholder="Campaign Title" name="campaignTitle" />
           </label>
           <label className="input input-bordered flex items-center gap-2">
-            <input className="w-3/6 py-2 px-3" type="text" placeholder="Campaign Type (Personal, Startup, Bussiness)" name="campaignType" />
+            <input className="w-3/6 py-2 px-3" required type="text" placeholder="Campaign Type (Personal, Startup, Bussiness)" name="campaignType" />
           </label>
           <label className="input input-bordered flex items-center gap-2">
-            <input className="w-3/6 py-2 px-3" type="text" placeholder="Description" name="description" />
+            <input className="w-3/6 py-2 px-3" required type="text" placeholder="Description" name="description" />
           </label>
           <label className="input input-bordered flex items-center gap-2">
-            <input className="w-3/6 py-2 px-3" type="number" placeholder="Minimum Donation Amount" name="donationAmount" />
+            <input className="w-3/6 py-2 px-3" required type="number" placeholder="Minimum Donation Amount" name="donationAmount" />
           </label>
           <label className="input input-bordered flex items-center gap-2">
-            <input className="w-3/6 py-2 px-3" type="date" name="date" />
+            <input className="w-3/6 py-2 px-3" required type="date" name="date" />
           </label>
           <label className="input input-bordered flex items-center gap-2">
-            <input className="w-3/6 py-2 px-3" type="email" value={user?.email} readOnly name="email" />
+            <input className="w-3/6 py-2 px-3" required type="email" value={user?.email} readOnly name="email" />
           </label>
           <label className="input input-bordered flex items-center gap-2">
-            <input className="w-3/6 py-2 px-3" type="email" value={user?.displayName} readOnly name="name" />
+            <input className="w-3/6 py-2 px-3" required type="email" value={user?.displayName} readOnly name="name" />
           </label>
           <input className="btn w-full" type="submit" value="Add Campaign"/>
       </form>
