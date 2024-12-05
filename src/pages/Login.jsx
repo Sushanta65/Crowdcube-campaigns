@@ -1,11 +1,13 @@
 import { useContext } from "react";
 import { AuthContext } from "../provider/AuthProvider";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 const Login = () => {
 
     const {loginUser, signInWithGoogle} = useContext(AuthContext)
-
+  const location = useLocation()
+  const navigate = useNavigate()
+  console.log(location)
     const handleLogin = (event) => {
         event.preventDefault()
 
@@ -13,9 +15,11 @@ const Login = () => {
         const email = form.email.value;
         const password = form.password.value;
          
-        loginUser(email, password)
+        loginUser(email, password, navigate, location)
         
     }
+
+    
 
   return (
     <div className="text-center">
@@ -43,7 +47,7 @@ const Login = () => {
         </label>
         <input className="btn" type="submit" value="Login" />
         <div className="divider"></div>
-        <button className="btn" onClick={signInWithGoogle}>Login With Google</button>
+        <button className="btn" onClick={() => signInWithGoogle(navigate, location)}>Login With Google</button>
         <span>New User? <Link to='/signUp'>Sign Up</Link></span>
       </form>
     </div>
