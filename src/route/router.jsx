@@ -5,6 +5,7 @@ import Login from "../pages/Login";
 import AddNewCampaign from "../pages/AddNewCampaign";
 import PrivateRoute from "./privateRoute";
 import AllCampaign from "../pages/AllCampaign";
+import MyCampaigns from "../pages/MyCampaigns";
 
 
 const router = createBrowserRouter([
@@ -26,7 +27,12 @@ const router = createBrowserRouter([
             },
             {
                 path: '/campaigns',
-                element: <AllCampaign></AllCampaign>
+                element: <AllCampaign></AllCampaign>,
+                loader: () => fetch('http://localhost:5000/campaigns')
+            },
+            {
+                path: '/myCampaigns',
+                element: <MyCampaigns></MyCampaigns>,
             }
         ]
     }

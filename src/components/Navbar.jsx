@@ -18,7 +18,7 @@ const Navbar = () => {
         <Link to="/addNewCampaign">Add New Campaign</Link>
       </li>
      {user?.email &&  <> <li>
-        <Link to="/myCampaign">My Campaign</Link>
+        <Link to="/myCampaigns">My Campaign</Link>
       </li>
       <li>
         <Link to="/myDonation">My Donations</Link>
