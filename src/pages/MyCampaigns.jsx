@@ -1,14 +1,12 @@
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import { AuthContext } from "../provider/AuthProvider";
+import { useLoaderData } from "react-router-dom";
 
 const MyCampaigns = () => {
-    const {user} = useContext(AuthContext)
-    // useEffect(() => {
-    //     fetch(`http://localhost:5000/campaigns/${user.email}`)
-    //     .then(res => res.json())
-    //     .then(data => console.log("data", data))
-
-    // }, [])
+  const loadedCampaigns = useLoaderData()
+  const {user} = useContext(AuthContext)
+  const myCampaigns = loadedCampaigns.filter(campaign => campaign?.email === user?.email)
+  
   return (
     <div>
       <div className="text-center mb-8">

@@ -1,10 +1,12 @@
 import { useLoaderData } from "react-router-dom";
 import Campaign from "../components/Campaign";
+import { useContext } from "react";
+import { AuthContext } from "../provider/AuthProvider";
 
 const AllCampaign = () => {
-  const campaigns = useLoaderData();
-  console.log(campaigns);
-  
+  const loadedCampaigns = useLoaderData();
+  const {campaigns, setCampaigns} = useContext(AuthContext)
+  setCampaigns(loadedCampaigns)
   return (
     <div className="container mx-auto px-4 my-10">
       <div className="text-center mb-8">

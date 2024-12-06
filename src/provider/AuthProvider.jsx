@@ -16,6 +16,7 @@ const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(true)
+  const [campaigns, setCampaigns] = useState(null)
   const provider = new GoogleAuthProvider();
   const createNewUser = (email, password, name, photoUrl) => {
     setLoading(true)
@@ -79,7 +80,9 @@ const AuthProvider = ({ children }) => {
     loginUser,
     signInWithGoogle,
     loggedOut,
-    loading
+    loading,
+    setCampaigns,
+    campaigns
   };
 
   
