@@ -1,10 +1,20 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../provider/AuthProvider";
 
 const Navbar = () => {
+  const { user, loggedOut } = useContext(AuthContext);
 
-  const {user, loggedOut} = useContext(AuthContext)
+  const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
+
+  useEffect(() => {
+    document.querySelector("html").setAttribute("data-theme", theme);
+    localStorage.setItem("theme", theme);
+  }, [theme]);
+
+  const toggleTheme = () => {
+    setTheme((previousheme) => (previousheme === "light" ? "dark" : "light"));
+  };
 
   const links = (
     <>
@@ -17,30 +27,51 @@ const Navbar = () => {
       <li>
         <Link to="/addNewCampaign">Add New Campaign</Link>
       </li>
-     {user?.email &&  <> <li>
-        <Link to="/myCampaigns">My Campaign</Link>
-      </li>
-      <li>
-        <Link to="/myDonation">My Donations</Link>
-      </li></>}
-      {user? <></>: <><li>
-        <Link to="/login">Login</Link>
-      </li>
-      <li>
-        <Link to="/signUp">Sign Up</Link>
-      </li></>}
-      
-      {user?.email? <li className="relative group">
-        <button className="cursor-pointer">User</button>
-        <ul className="absolute left-0 top-8 hidden w-40 bg-base-100 p-2 shadow group-hover:block">
+      {user?.email && (
+        <>
+          {" "}
           <li>
-            <span>{user.displayName}</span>
+            <Link to="/myCampaigns">My Campaign</Link>
           </li>
           <li>
-            <button onClick={loggedOut}>Logout</button>
+            <Link to="/myDonation">My Donations</Link>
           </li>
-        </ul>
-      </li>: <></>}
+        </>
+      )}
+      {user ? (
+        <></>
+      ) : (
+        <>
+          <li>
+            <Link to="/login">Login</Link>
+          </li>
+          <li>
+            <Link to="/signUp">Sign Up</Link>
+          </li>
+        </>
+      )}
+
+      <li>
+        <button className="" onClick={toggleTheme}>
+          {theme === "light" ? "Switch to Dark" : "Switch to Light"}
+        </button>
+      </li>
+
+      {user?.email ? (
+        <li className="relative group">
+          <button className="cursor-pointer">User</button>
+          <ul className="absolute left-0 top-8 hidden w-40 bg-base-100 p-2 shadow group-hover:block">
+            <li>
+              <span>{user.displayName}</span>
+            </li>
+            <li>
+              <button onClick={loggedOut}>Logout</button>
+            </li>
+          </ul>
+        </li>
+      ) : (
+        <></>
+      )}
     </>
   );
   return (

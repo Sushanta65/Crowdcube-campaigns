@@ -1,7 +1,9 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const Campaign = ({ campaign }) => {
   const {
+    _id,
     thumnailUrl,
     campaignTitle,
     campaignType,
@@ -43,7 +45,7 @@ const Campaign = ({ campaign }) => {
         </div>
         
         <div className="card-actions justify-end mt-4">
-          <button className="btn btn-primary">See More</button>
+          <Link to={`/campaigns/${_id}`} className="btn btn-primary">See More</Link>
         </div>
       </div>
     </div>

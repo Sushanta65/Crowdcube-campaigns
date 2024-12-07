@@ -5,8 +5,8 @@ import { AuthContext } from "../provider/AuthProvider";
 
 const AllCampaign = () => {
   const loadedCampaigns = useLoaderData();
-  const {campaigns, setCampaigns} = useContext(AuthContext)
-  setCampaigns(loadedCampaigns)
+ 
+  
   return (
     <div className="container mx-auto px-4 my-10">
       <div className="text-center mb-8">
@@ -15,7 +15,7 @@ const AllCampaign = () => {
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-        {campaigns.map((campaign) => (
+        {loadedCampaigns?.map((campaign) => (
           <Campaign key={campaign._id} campaign={campaign}></Campaign>
         ))}
       </div>
