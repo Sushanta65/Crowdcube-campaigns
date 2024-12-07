@@ -43,8 +43,8 @@ const UpdateCampaign = () => {
         }
         console.log(campaign)
     
-        fetch('http://localhost:5000/campaigns',{
-          method: 'POST',
+        fetch(`http://localhost:5000/campaigns/${_id}`,{
+          method: 'PUT',
           headers: {
             'content-type' : 'application/json'
           },

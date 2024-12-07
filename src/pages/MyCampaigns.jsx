@@ -11,9 +11,7 @@ const MyCampaigns = () => {
     (campaign) => campaign?.email === user?.email
   );
 
-  const handleUpdate = (id) => {
-    console.log("Update campaign with ID:", id);
-  };
+
 
   const handleDelete = (id) => {
     console.log("Delete campaign with ID:", id);

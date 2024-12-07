@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const Campaign = ({ campaign }) => {
+const Campaign = ({ campaign, campaigns, setCampaigns }) => {
   const {
     _id,
     thumnailUrl,
