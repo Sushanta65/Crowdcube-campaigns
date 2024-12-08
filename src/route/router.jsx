@@ -8,6 +8,7 @@ import AllCampaign from "../pages/AllCampaign";
 import MyCampaigns from "../pages/MyCampaigns";
 import CampaignDetals from "../pages/CampaignDetails";
 import UpdateCampaign from "../pages/UpdateCampaign";
+import HomeLayout from "../Layout/HomeLayout";
 
 
 const router = createBrowserRouter([
@@ -15,6 +16,10 @@ const router = createBrowserRouter([
         path:'/',
         element: <MainLayout/>,
         children: [
+            {
+                path: '/',
+                element: <HomeLayout></HomeLayout>
+            },
             {
                 path:'/signUp',
                 element: <SignUp></SignUp>

@@ -1,0 +1,72 @@
+import { Swiper, SwiperSlide } from 'swiper/react';
+
+// Import Swiper styles
+import 'swiper/css';
+import 'swiper/css/pagination';
+
+
+// import required modules
+import { Pagination, Navigation ,Autoplay} from 'swiper/modules';
+
+const BannerSlider = () => {
+
+
+  const slides = [
+    {
+      id: 1,
+      image: "https://via.placeholder.com/1200x600",
+      title: "Empower Change with Your Donation",
+      description: "Support impactful campaigns and make a difference today.",
+    },
+    {
+      id: 2,
+      image: "https://via.placeholder.com/1200x600/ff7f7f",
+      title: "Join Hands for a Better Tomorrow",
+      description: "Every small contribution leads to a giant leap for those in need.",
+    },
+    {
+      id: 3,
+      image: "https://via.placeholder.com/1200x600/87ceeb",
+      title: "Spread Warmth & Care",
+      description: "Your generosity can bring smiles and transform lives.",
+    },
+  ];
+
+  return (
+    <div>
+       <Swiper
+        modules={[Navigation, Pagination, Autoplay]}
+        autoplay={{ delay: 3000, disableOnInteraction: false }}
+        navigation
+        pagination={{ clickable: true }}
+        loop
+        spaceBetween={30}
+        slidesPerView={1}
+        className="rounded-lg shadow-lg"
+      >
+        {slides.map((slide) => (
+          <SwiperSlide key={slide.id}>
+            <div
+              className="relative w-full h-[600px] flex items-center justify-center bg-cover bg-center"
+              style={{
+                backgroundImage: `url(${slide.image})`,
+              }}
+            >
+              <div className="absolute inset-0 bg-black bg-opacity-40"></div>
+              <div className="text-center text-white z-10">
+                <h2 className="text-4xl md:text-5xl font-bold">{slide.title}</h2>
+                <p className="mt-4 text-lg md:text-xl">{slide.description}</p>
+                <button className="mt-6 btn btn-primary px-6 py-2">
+                  Learn More
+                </button>
+              </div>
+            </div>
+          </SwiperSlide>
+        ))}
+      </Swiper>
+    
+    </div>
+  );
+};
+
+export default BannerSlider;

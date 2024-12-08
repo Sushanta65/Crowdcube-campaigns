@@ -8,7 +8,7 @@ const MainLayout = () => {
       <section>
         <Navbar></Navbar>
       </section>
-      <section className="w-4/5 mx-auto">
+      <section>
         <Outlet></Outlet>
       </section>
       <section>

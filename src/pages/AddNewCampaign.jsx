@@ -1,21 +1,12 @@
 import { useContext } from "react";
 import { AuthContext } from "../provider/AuthProvider";
+import { FiImage, FiType, FiDollarSign, FiCalendar, FiMail, FiUser, FiFileText } from "react-icons/fi";
 
 const AddNewCampaign = () => {
-
-const {user} = useContext(AuthContext)
-// image/thumbnail ( use image URL)
-// Campaign title(string) 
-// Campaign type ( personal issue, startup, business, creative ideas) you can take it as a dropdown list. 
-// description
-// Minimum donation amount (number) 
-// Deadline (Date) 
-// User Email  (Read Only/ you can not edit this field) 
-// User Name  (Read Only/ you can not edit this field) 
-// “Add” button
+  const { user } = useContext(AuthContext);
 
   const handleAddCampaign = (event) => {
-    event.preventDefault()
+    event.preventDefault();
 
     const form = event.target;
     const thumnailUrl = form.thumnailUrl.value;
@@ -26,7 +17,7 @@ const {user} = useContext(AuthContext)
     const donationAmount = form.donationAmount.value;
     const email = form.email.value;
     const name = form.name.value;
-    
+
     const campaign = {
       thumnailUrl,
       campaignTitle,
@@ -35,56 +26,125 @@ const {user} = useContext(AuthContext)
       donationAmount,
       date,
       email,
-      name
-    }
-    console.log(campaign)
+      name,
+    };
+    console.log(campaign);
 
-    fetch('http://localhost:5000/campaigns',{
-      method: 'POST',
+    fetch("http://localhost:5000/campaigns", {
+      method: "POST",
       headers: {
-        'content-type' : 'application/json'
+        "content-type": "application/json",
       },
-      body: JSON.stringify(campaign)
+      body: JSON.stringify(campaign),
     })
-    .then(res => res.json())
-    .then(data => {
-      console.log(data)
-      form.reset()
-    })
-  }
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        form.reset();
+      });
+  };
 
   return (
-    <div className="text-center">
-      <div className="my-10">
-        <h2 className="font-bold text-3xl pb-2">Add New Campaigns</h2>
-        <p>You can add more new campaign.</p>
+    <div className="container mx-auto p-6">
+      <div className="text-center mb-8">
+        <h2 className="font-bold text-3xl pb-2">Add New Campaign</h2>
+        <p className="text-gray-500 dark:text-gray-400">You can add a new campaign to help others.</p>
       </div>
-      <form onSubmit={handleAddCampaign}>
-      <label className="input input-bordered flex items-center gap-5">
-            <input className="w-3/6 py-2 px-3" required type="url" placeholder="Thumnail Url" name="thumnailUrl" />
-          </label>
-          <label className="input input-bordered flex items-center gap-2">
-            <input className="w-3/6 py-2 px-3" required type="text" placeholder="Campaign Title" name="campaignTitle" />
-          </label>
-          <label className="input input-bordered flex items-center gap-2">
-            <input className="w-3/6 py-2 px-3" required type="text" placeholder="Campaign Type (Personal, Startup, Bussiness)" name="campaignType" />
-          </label>
-          <label className="input input-bordered flex items-center gap-2">
-            <input className="w-3/6 py-2 px-3" required type="text" placeholder="Description" name="description" />
-          </label>
-          <label className="input input-bordered flex items-center gap-2">
-            <input className="w-3/6 py-2 px-3" required type="number" placeholder="Minimum Donation Amount" name="donationAmount" />
-          </label>
-          <label className="input input-bordered flex items-center gap-2">
-            <input className="w-3/6 py-2 px-3" required type="date" name="date" />
-          </label>
-          <label className="input input-bordered flex items-center gap-2">
-            <input className="w-3/6 py-2 px-3" required type="email" value={user?.email} readOnly name="email" />
-          </label>
-          <label className="input input-bordered flex items-center gap-2">
-            <input className="w-3/6 py-2 px-3" required type="email" value={user?.displayName} readOnly name="name" />
-          </label>
-          <input className="btn w-full" type="submit" value="Add Campaign"/>
+
+      <form onSubmit={handleAddCampaign} className="space-y-6 bg-base-100 p-6 rounded-lg shadow-lg">
+        <div className="flex items-center gap-3">
+          <FiImage className="text-xl text-primary" />
+          <input
+            className="input input-bordered w-full"
+            required
+            type="url"
+            placeholder="Thumbnail URL"
+            name="thumnailUrl"
+          />
+        </div>
+
+        <div className="flex items-center gap-3">
+          <FiType className="text-xl text-primary" />
+          <input
+            className="input input-bordered w-full"
+            required
+            type="text"
+            placeholder="Campaign Title"
+            name="campaignTitle"
+          />
+        </div>
+
+        <div className="flex items-center gap-3">
+          <FiFileText className="text-xl text-primary" />
+          <input
+            className="input input-bordered w-full"
+            required
+            type="text"
+            placeholder="Campaign Type (Personal, Startup, Business)"
+            name="campaignType"
+          />
+        </div>
+
+        <div className="flex items-center gap-3">
+          <FiFileText className="text-xl text-primary" />
+          <textarea
+            className="textarea textarea-bordered w-full"
+            required
+            placeholder="Description"
+            name="description"
+          ></textarea>
+        </div>
+
+        <div className="flex items-center gap-3">
+          <FiDollarSign className="text-xl text-primary" />
+          <input
+            className="input input-bordered w-full"
+            required
+            type="number"
+            placeholder="Minimum Donation Amount"
+            name="donationAmount"
+          />
+        </div>
+
+        <div className="flex items-center gap-3">
+          <FiCalendar className="text-xl text-primary" />
+          <input
+            className="input input-bordered w-full"
+            required
+            type="date"
+            name="date"
+          />
+        </div>
+
+        <div className="flex items-center gap-3">
+          <FiMail className="text-xl text-primary" />
+          <input
+            className="input input-bordered w-full"
+            required
+            type="email"
+            value={user?.email}
+            readOnly
+            name="email"
+          />
+        </div>
+
+        <div className="flex items-center gap-3">
+          <FiUser className="text-xl text-primary" />
+          <input
+            className="input input-bordered w-full"
+            required
+            type="text"
+            value={user?.displayName}
+            readOnly
+            name="name"
+          />
+        </div>
+
+        <div>
+          <button className="btn btn-primary w-full" type="submit">
+            Add Campaign
+          </button>
+        </div>
       </form>
     </div>
   );
