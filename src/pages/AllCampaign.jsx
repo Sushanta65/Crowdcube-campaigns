@@ -7,7 +7,7 @@ const AllCampaign = () => {
   const loadedCampaigns = useLoaderData();
   const { campaigns, setCampaigns } = useContext(AuthContext);
 
-  // Store the loaded campaigns in context
+  
   setCampaigns(loadedCampaigns);
 
   return (
@@ -61,3 +61,4 @@ const AllCampaign = () => {
 };
 
 export default AllCampaign;
+

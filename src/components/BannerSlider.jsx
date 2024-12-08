@@ -9,24 +9,26 @@ import 'swiper/css/pagination';
 import { Pagination, Navigation ,Autoplay} from 'swiper/modules';
 
 const BannerSlider = () => {
-
+  
+  
+  
 
   const slides = [
     {
       id: 1,
-      image: "https://via.placeholder.com/1200x600",
+      image: "https://i.ibb.co.com/bdwcf2g/fund-01.jpg",
       title: "Empower Change with Your Donation",
       description: "Support impactful campaigns and make a difference today.",
     },
     {
       id: 2,
-      image: "https://via.placeholder.com/1200x600/ff7f7f",
+      image: "https://i.ibb.co.com/WPRXDHX/fund-02.png",
       title: "Join Hands for a Better Tomorrow",
       description: "Every small contribution leads to a giant leap for those in need.",
     },
     {
       id: 3,
-      image: "https://via.placeholder.com/1200x600/87ceeb",
+      image: "https://i.ibb.co.com/cNCc016/fund-03.jpg",
       title: "Spread Warmth & Care",
       description: "Your generosity can bring smiles and transform lives.",
     },

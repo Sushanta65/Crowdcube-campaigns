@@ -25,7 +25,7 @@ const Campaign = ({ campaign, campaigns, setCampaigns }) => {
     <div className="card w-full bg-base-100 shadow-xl transition-transform transform hover:scale-105">
       <figure>
         <img
-          src={"https://img.daisyui.com/images/stock/photo-1494232410401-ad00d5433cfa.webp"}
+          src={thumnailUrl}
           alt={campaignTitle}
           className="w-full h-48 object-cover rounded-t-xl"
         />

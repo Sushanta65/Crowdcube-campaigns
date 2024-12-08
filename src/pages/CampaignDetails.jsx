@@ -1,8 +1,10 @@
+import { useContext } from "react";
 import { useLoaderData } from "react-router-dom";
+import { AuthContext } from "../provider/AuthProvider";
 
 const CampaignDetails = () => {
   const campaign = useLoaderData();
-
+  const {user} = useContext(AuthContext)
   const {
     campaignTitle,
     campaignType,
@@ -13,6 +15,30 @@ const CampaignDetails = () => {
     thumnailUrl,
     date,
   } = campaign;
+
+  const donated = {
+    campaignTitle,
+    campaignType,
+    description,
+    donationAmount,
+    email: user.email,
+    name: user.name,
+    thumnailUrl,
+    date,
+  }
+
+  const handleDonate = () => {
+   fetch('http://localhost:5000/myDonations', {
+    method: 'POST',
+    headers: {
+      'content-type': 'application/json'
+    },
+    body: JSON.stringify(donated)
+   })
+   .then(data => {
+    console.log(data)
+   })
+  }
 
   return (
     <div className="container mx-auto p-6 md:p-12">
@@ -63,9 +89,10 @@ const CampaignDetails = () => {
           </div>
 
           <div className="text-center mt-6">
-            <button className="btn btn-primary px-8 py-3 rounded-full">
+            <button onClick={handleDonate} disabled={new Date() < new Date(date)? false: true} className="btn btn-primary px-8 py-3 rounded-full">
               Donate Now
             </button>
+            <p>{new Date() > new Date(date)? 'Campaign Inactive': ''}</p>
           </div>
         </div>
       </div>
