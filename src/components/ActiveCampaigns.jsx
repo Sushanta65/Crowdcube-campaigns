@@ -3,9 +3,9 @@ import Campaign from "./Campaign";
 
 const ActiveCampaigns = () => {
   const [campaigns, setCampaigns] = useState([]);
-  
+
   useEffect(() => {
-    fetch("http://localhost:5000/activeCampaigns", )
+    fetch("https://crowdcube-server-wheat.vercel.app/activeCampaigns")
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
@@ -20,17 +20,24 @@ const ActiveCampaigns = () => {
 
   return (
     <div className="my-20">
-        
-      <div className="text-center mb-8 pb-10" >
+      <div className="text-center mb-8 pb-10">
         <h2 className="font-bold text-3xl pb-2">Running Campaigns</h2>
-        <p className="text-gray-500 dark:text-gray-400">Explore all of the campaigns added by users.</p>
+        <p className="text-gray-500 dark:text-gray-400">
+          Explore all of the campaigns added by users.
+        </p>
       </div>
 
-       {campaigns.length?  <div className="grid grid-cols-3 w-4/5 mx-auto gap-10 my-2">
-        {
-            activeCampaigns.map(campaign => <Campaign key={campaign._id} campaign={campaign}></Campaign>)
-        }
-    </div> : <div className=" text-center text-blue-700"><span className="loading loading-dots loading-lg"></span></div>}
+      {campaigns.length ? (
+        <div className="grid grid-cols-3 w-4/5 mx-auto gap-10 my-2">
+          {activeCampaigns.map((campaign) => (
+            <Campaign key={campaign._id} campaign={campaign}></Campaign>
+          ))}
+        </div>
+      ) : (
+        <div className=" text-center text-blue-700">
+          <span className="loading loading-dots loading-lg"></span>
+        </div>
+      )}
     </div>
   );
 };

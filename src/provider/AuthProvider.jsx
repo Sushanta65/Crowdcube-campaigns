@@ -44,6 +44,7 @@ const AuthProvider = ({ children }) => {
           .then(() => {
             setUser({ ...auth.currentUser });
             setLoading(false);
+            
           })
           .catch((err) => setError(err.message));
       })

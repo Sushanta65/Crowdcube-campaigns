@@ -1,23 +1,29 @@
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../provider/AuthProvider";
-import { Link } from "react-router-dom";
+import { Link, useLoaderData } from "react-router-dom";
 import Swal from "sweetalert2";
 import { FiEdit, FiTrash2 } from "react-icons/fi";
 
 const MyCampaigns = () => {
 
+  const loadedData = useLoaderData()
   const { user } = useContext(AuthContext);
-  const [myCampaigns, setMyCampaigns] = useState([]);
+  const [myCampaigns, setMyCampaigns] = useState(loadedData.filter(campaign => campaign.email === user?.email));
 
-  useEffect(() => {
-    fetch(`http://localhost:5000/campaigns?email=${user.email}`)
-    .then(res => res.json())
-    .then(data => {
-      console.log(data)
-      setMyCampaigns(data)
-    })
-    .catch(err => console.log(err))
-  }, [user?.email])
+
+  // useEffect(() => {
+  //   fetch(
+  //     `https://crowdcube-server-wheat.vercel.app/campaigns?email=${user?.email}`
+  //   )
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       console.log(data);
+  //       setMyCampaigns(data);
+  //     })
+  //     .catch((err) => console.log(err));
+  // }, [user?.email]);
+
+
 
   const handleDelete = (id) => {
     Swal.fire({
@@ -30,7 +36,7 @@ const MyCampaigns = () => {
       confirmButtonText: "Yes, Delete It!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:5000/campaigns/${id}`, {
+        fetch(`https://crowdcube-server-wheat.vercel.app/campaigns/${id}`, {
           method: "DELETE",
         })
           .then((res) => res.json())
@@ -61,60 +67,72 @@ const MyCampaigns = () => {
         </p>
       </div>
 
-      {myCampaigns.length? <><div className="overflow-x-auto">
-        <table className="table w-full bg-base-100 shadow-md rounded-lg">
-          <thead className="bg-gradient-to-r from-blue-500 to-blue-700 text-white">
-            <tr>
-              <th className="py-3 px-4 text-left">#</th>
-              <th className="py-3 px-4 text-left">Title</th>
-              <th className="py-3 px-4 text-left">Type</th>
-              <th className="py-3 px-4 text-left">Donation (BDT)</th>
-              <th className="py-3 px-4 text-left">Deadline</th>
-              <th className="py-3 px-4 text-left">Actions</th>
-            </tr>
-          </thead>
+      {myCampaigns.length ? (
+        <>
+          <div className="overflow-x-auto">
+            <table className="table w-full bg-base-100 shadow-md rounded-lg">
+              <thead className="bg-gradient-to-r from-blue-500 to-blue-700 text-white">
+                <tr>
+                  <th className="py-3 px-4 text-left">#</th>
+                  <th className="py-3 px-4 text-left">Title</th>
+                  <th className="py-3 px-4 text-left">Type</th>
+                  <th className="py-3 px-4 text-left">Donation (BDT)</th>
+                  <th className="py-3 px-4 text-left">Deadline</th>
+                  <th className="py-3 px-4 text-left">Actions</th>
+                </tr>
+              </thead>
 
-          <tbody>
-            {myCampaigns.map((campaign, index) => (
-              <tr
-                key={campaign._id}
-                className={`hover:bg-blue-100 dark:hover:bg-gray-700 ${
-                  index % 2 === 0 ? "bg-white dark:bg-gray-800" : "bg-gray-100 dark:bg-gray-900"
-                }`}
-              >
-                <td className="py-3 px-4">{index + 1}</td>
-                <td className="py-3 px-4 font-medium">{campaign.campaignTitle}</td>
-                <td className="py-3 px-4">{campaign.campaignType}</td>
-                <td className="py-3 px-4">{campaign.donationAmount}</td>
-                <td className="py-3 px-4">{campaign.date}</td>
-                
-                <td className="py-3 px-4 flex space-x-2">
-                  <Link
-                    to={`/updateCampaign/${campaign._id}`}
-                    className="btn btn-sm bg-green-500 text-white hover:bg-green-600 flex items-center gap-1"
+              <tbody>
+                {myCampaigns.map((campaign, index) => (
+                  <tr
+                    key={campaign._id}
+                    className={`hover:bg-blue-100 dark:hover:bg-gray-700 ${
+                      index % 2 === 0
+                        ? "bg-white dark:bg-gray-800"
+                        : "bg-gray-100 dark:bg-gray-900"
+                    }`}
                   >
-                    <FiEdit /> Update
-                  </Link>
-                  <button
-                    onClick={() => handleDelete(campaign._id)}
-                    className="btn btn-sm bg-red-500 text-white hover:bg-red-600 flex items-center gap-1"
-                  >
-                    <FiTrash2 /> Delete
-                  </button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+                    <td className="py-3 px-4">{index + 1}</td>
+                    <td className="py-3 px-4 font-medium">
+                      {campaign.campaignTitle}
+                    </td>
+                    <td className="py-3 px-4">{campaign.campaignType}</td>
+                    <td className="py-3 px-4">{campaign.donationAmount}</td>
+                    <td className="py-3 px-4">{campaign.date}</td>
 
-      {myCampaigns.length === 0 && (
-        <div className="text-center mt-10">
-          <p className="text-lg text-gray-500 dark:text-gray-400">
-            You have no campaigns added yet.
-          </p>
+                    <td className="py-3 px-4 flex space-x-2">
+                      <Link
+                        to={`/updateCampaign/${campaign._id}`}
+                        className="btn btn-sm bg-green-500 text-white hover:bg-green-600 flex items-center gap-1"
+                      >
+                        <FiEdit /> Update
+                      </Link>
+                      <button
+                        onClick={() => handleDelete(campaign._id)}
+                        className="btn btn-sm bg-red-500 text-white hover:bg-red-600 flex items-center gap-1"
+                      >
+                        <FiTrash2 /> Delete
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+
+          {myCampaigns.length === 0 && (
+            <div className="text-center mt-10">
+              <p className="text-lg text-gray-500 dark:text-gray-400">
+                You have no campaigns added yet.
+              </p>
+            </div>
+          )}
+        </>
+      ) : (
+        <div className=" text-center text-blue-700">
+          <span className="loading loading-dots loading-lg"></span>
         </div>
-      )}</> : <div className=" text-center text-blue-700"><span className="loading loading-dots loading-lg"></span></div>}
+      )}
     </div>
   );
 };

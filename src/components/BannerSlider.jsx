@@ -1,4 +1,5 @@
 import { Swiper, SwiperSlide } from 'swiper/react';
+import { Fade } from "react-awesome-reveal";
 
 // Import Swiper styles
 import 'swiper/css';
@@ -66,6 +67,10 @@ const BannerSlider = () => {
           </SwiperSlide>
         ))}
       </Swiper>
+    
+      <Fade>
+  <p>I will gently appear as I enter the viewport</p>
+</Fade>
     
     </div>
   );

@@ -1,6 +1,14 @@
 import { useContext } from "react";
 import { AuthContext } from "../provider/AuthProvider";
-import { FiImage, FiType, FiDollarSign, FiCalendar, FiMail, FiUser, FiFileText } from "react-icons/fi";
+import {
+  FiImage,
+  FiType,
+  FiDollarSign,
+  FiCalendar,
+  FiMail,
+  FiUser,
+  FiFileText,
+} from "react-icons/fi";
 import Swal from "sweetalert2";
 
 const AddNewCampaign = () => {
@@ -31,7 +39,7 @@ const AddNewCampaign = () => {
     };
     console.log(campaign);
 
-    fetch("http://localhost:5000/campaigns", {
+    fetch("https://crowdcube-server-wheat.vercel.app/campaigns", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -47,7 +55,7 @@ const AddNewCampaign = () => {
           icon: "success",
           title: "Campaign Added Successfully.",
           showConfirmButton: false,
-          timer: 3000
+          timer: 3000,
         });
       });
   };
@@ -56,10 +64,15 @@ const AddNewCampaign = () => {
     <div className="w-4/5 mx-auto p-6 mt-10">
       <div className="text-center mb-8">
         <h2 className="font-bold text-3xl pb-2">Add New Campaign</h2>
-        <p className="text-gray-500 dark:text-gray-400">You can add a new campaign to help others.</p>
+        <p className="text-gray-500 dark:text-gray-400">
+          You can add a new campaign to help others.
+        </p>
       </div>
 
-      <form onSubmit={handleAddCampaign} className="space-y-6 bg-base-100 p-6 rounded-lg shadow-lg">
+      <form
+        onSubmit={handleAddCampaign}
+        className="space-y-6 bg-base-100 p-6 rounded-lg shadow-lg"
+      >
         <div className="flex items-center gap-3">
           <FiImage className="text-xl text-primary" />
           <input

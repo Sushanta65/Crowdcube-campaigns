@@ -43,7 +43,7 @@ const UpdateCampaign = () => {
       name: user?.displayName,
     };
 
-    fetch(`http://localhost:5000/campaigns/${_id}`, {
+    fetch(`https://crowdcube-server-wheat.vercel.app/campaigns/${_id}`, {
       method: "PUT",
       headers: {
         "content-type": "application/json",
