@@ -1,15 +1,23 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../provider/AuthProvider";
-import { Link, useLoaderData } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 import { FiEdit, FiTrash2 } from "react-icons/fi";
 
 const MyCampaigns = () => {
-  const loadedCampaigns = useLoaderData();
+
   const { user } = useContext(AuthContext);
-  const [myCampaigns, setMyCampaigns] = useState(
-    loadedCampaigns.filter((campaign) => campaign?.email === user?.email)
-  );
+  const [myCampaigns, setMyCampaigns] = useState([]);
+  
+  useEffect(() => {
+    fetch(`http://localhost:5000/campaigns/${user?.email}`)
+    .then(res => res.json())
+    .then(data => {
+      console.log(data)
+      setMyCampaigns(data)
+    })
+    .catch(err => console.log(err))
+  }, [user?.email])
 
   const handleDelete = (id) => {
     Swal.fire({

@@ -3,7 +3,10 @@ import { AuthContext } from "../provider/AuthProvider";
 import { Link } from "react-router-dom";
 
 const SignUp = () => {
-    const {createNewUser, users, signInWithGoogle} = useContext(AuthContext)
+    const {createNewUser, users, signInWithGoogle, error} = useContext(AuthContext)
+    const userAlreadyExistError = "Firebase: Error (auth/email-already-in-use).";
+  const shortPasswordError = "short-password";
+  const strongLessPassword = 'easy-password'
     
     const handleSingUp = (event) => {
         event.preventDefault()
@@ -26,17 +29,30 @@ const SignUp = () => {
       <div>
         <form onSubmit={handleSingUp} className="w-4/5 mx-auto flex flex-col gap-5">
           <label className="input input-bordered flex items-center gap-2">
-            <input className="grow" type="Name" placeholder="Name" name="name" />
+            <input required className="grow" type="Name" placeholder="Name" name="name" />
           </label>
           <label className="input input-bordered flex items-center gap-2">
-            <input className="w-3/6 py-2 px-3" type="email" placeholder="Email" name="email" />
+            <input required className="w-3/6 py-2 px-3" type="email" placeholder="Email" name="email" />
           </label>
           <label className="input input-bordered flex items-center gap-2">
-            <input className="w-3/6 py-2 px-3" type="url" placeholder="Photo Url" name="photoUrl" />
+            <input required className="w-3/6 py-2 px-3" type="url" placeholder="Photo Url" name="photoUrl" />
           </label>
           <label className="input input-bordered flex items-center gap-2">
-            <input className="w-3/6 py-2 px-3" type="password" placeholder="Password" name="password" />
+            <input required className="w-3/6 py-2 px-3" type="password" placeholder="Password" name="password" />
           </label>
+          {error && error === shortPasswordError && (
+              <p className="text-red-600">Password must be at least 6 character</p>
+            )}
+            {error && error === userAlreadyExistError && (
+              <p className="text-red-600">
+                This Email Is Used in Another Account.
+              </p>
+            )}
+            {error && error === strongLessPassword && (
+              <p className="text-red-600">
+                Password Must Be at Least One Uppercase letter, and include at least one lowercase letter.
+              </p>
+            )}
           <input className="btn" type="submit" value='Sign Up' />
           <div className="divider"></div>
           <button onClick={signInWithGoogle} className="btn">Sign Up With Google</button>

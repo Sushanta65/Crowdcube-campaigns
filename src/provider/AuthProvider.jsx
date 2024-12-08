@@ -18,7 +18,24 @@ const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true)
   const [campaigns, setCampaigns] = useState(null)
   const provider = new GoogleAuthProvider();
+
+
+
   const createNewUser = (email, password, name, photoUrl) => {
+    setError('')
+
+    if(password.length < 6){
+      setError('short-password')
+      return;
+    }
+
+    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z]).{6,}$/;
+
+if(!passwordRegex.test(password)){
+  setError('easy-password');
+  return;
+}
+
     setLoading(true)
     createUserWithEmailAndPassword(auth, email, password)
       .then(() => {
@@ -36,6 +53,11 @@ const AuthProvider = ({ children }) => {
   };
 
   const loginUser = (email, password, navigate, location) => {
+    setError('')
+    if(password.length < 6){
+      setError('short-password')
+      return;
+    }
     setLoading(true)
     signInWithEmailAndPassword(auth, email, password)
       .then((result) => {
@@ -44,7 +66,7 @@ const AuthProvider = ({ children }) => {
         setLoading(false)
         
       })
-      .catch((err) => console.log(err.message));
+      .catch((err) => setError(err.message));
   };
 
   const signInWithGoogle = (navigate, location) => {
@@ -82,7 +104,9 @@ const AuthProvider = ({ children }) => {
     loggedOut,
     loading,
     setCampaigns,
-    campaigns
+    campaigns,
+    error, 
+    setError
   };
 
   

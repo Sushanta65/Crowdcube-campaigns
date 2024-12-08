@@ -58,7 +58,7 @@ const Navbar = () => {
       </li>
 
       {user?.email ? (
-        <li className="relative group">
+        <li className="relative group z-50">
           <button className="cursor-pointer">User</button>
           <ul className="absolute left-0 top-8 hidden w-40 bg-base-100 p-2 shadow group-hover:block">
             <li>
