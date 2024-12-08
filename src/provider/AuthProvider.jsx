@@ -9,6 +9,7 @@ import {
   signOut,
   updateProfile,
 } from "firebase/auth";
+import Swal from "sweetalert2";
 
 export const AuthContext = createContext();
 
@@ -44,7 +45,28 @@ const AuthProvider = ({ children }) => {
           .then(() => {
             setUser({ ...auth.currentUser });
             setLoading(false);
-            
+            let timerInterval;
+        Swal.fire({
+          title: "Sign Up Successfully!",
+          html: "Go Ahead!",
+          timer: 4000,
+          timerProgressBar: true,
+          didOpen: () => {
+            Swal.showLoading();
+            const timer = Swal.getPopup().querySelector("b");
+            timerInterval = setInterval(() => {
+              timer.textContent = `${Swal.getTimerLeft()}`;
+            }, 100);
+          },
+          willClose: () => {
+            clearInterval(timerInterval);
+          },
+        }).then((result) => {
+          /* Read more about handling dismissals below */
+          if (result.dismiss === Swal.DismissReason.timer) {
+            console.log("I was closed by the timer");
+          }
+        });
           })
           .catch((err) => setError(err.message));
       })

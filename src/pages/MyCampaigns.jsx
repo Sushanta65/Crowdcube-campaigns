@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { AuthContext } from "../provider/AuthProvider";
 import { Link, useLoaderData } from "react-router-dom";
 import Swal from "sweetalert2";
@@ -9,20 +9,6 @@ const MyCampaigns = () => {
   const loadedData = useLoaderData()
   const { user } = useContext(AuthContext);
   const [myCampaigns, setMyCampaigns] = useState(loadedData.filter(campaign => campaign.email === user?.email));
-
-
-  // useEffect(() => {
-  //   fetch(
-  //     `https://crowdcube-server-wheat.vercel.app/campaigns?email=${user?.email}`
-  //   )
-  //     .then((res) => res.json())
-  //     .then((data) => {
-  //       console.log(data);
-  //       setMyCampaigns(data);
-  //     })
-  //     .catch((err) => console.log(err));
-  // }, [user?.email]);
-
 
 
   const handleDelete = (id) => {
