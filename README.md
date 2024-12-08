@@ -34,7 +34,7 @@ Crowdcube is an intuitive and user-friendly platform that enables users to creat
 - **Backend**: Node.js, Express.js
 - **Authentication**: Firebase Authentication
 - **Routing**: React Router
-- **Hosting**: Netlify (Frontend), Vercel (Backend)
+- **Hosting**: Firebase (Frontend), Vercel (Backend)
 
 ---
 
