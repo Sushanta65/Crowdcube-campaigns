@@ -17,6 +17,8 @@ const UpdateCampaign = () => {
     date,
   } = campaign;
 
+  console.log(campaign)
+
   const handleUpdateCampaign = (event) => {
     event.preventDefault();
 

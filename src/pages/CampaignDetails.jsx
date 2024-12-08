@@ -4,6 +4,7 @@ import { AuthContext } from "../provider/AuthProvider";
 
 const CampaignDetails = () => {
   const campaign = useLoaderData();
+  console.log(campaign)
   const {user} = useContext(AuthContext)
   const {
     campaignTitle,

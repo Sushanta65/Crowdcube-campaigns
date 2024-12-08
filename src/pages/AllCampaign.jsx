@@ -17,7 +17,7 @@ const AllCampaign = () => {
         <p className="text-gray-500 dark:text-gray-400">Explore all of the campaigns added by users.</p>
       </div>
 
-      <div className="overflow-x-auto shadow-2xl">
+      {campaigns.length? <div className="overflow-x-auto shadow-2xl">
         <table className="table w-full bg-transparent shadow-md rounded-lg">
           <thead className="bg-gradient-to-r from-blue-500 to-blue-700 text-white">
             <tr>
@@ -55,7 +55,7 @@ const AllCampaign = () => {
             ))}
           </tbody>
         </table>
-      </div>
+      </div> : <div className=" text-center text-blue-700"><span className="loading loading-dots loading-lg"></span></div>}
     </div>
   );
 };

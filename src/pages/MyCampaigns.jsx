@@ -8,9 +8,9 @@ const MyCampaigns = () => {
 
   const { user } = useContext(AuthContext);
   const [myCampaigns, setMyCampaigns] = useState([]);
-  
+
   useEffect(() => {
-    fetch(`http://localhost:5000/campaigns/${user?.email}`)
+    fetch(`http://localhost:5000/campaigns?email=${user.email}`)
     .then(res => res.json())
     .then(data => {
       console.log(data)
@@ -61,7 +61,7 @@ const MyCampaigns = () => {
         </p>
       </div>
 
-      <div className="overflow-x-auto">
+      {myCampaigns.length? <><div className="overflow-x-auto">
         <table className="table w-full bg-base-100 shadow-md rounded-lg">
           <thead className="bg-gradient-to-r from-blue-500 to-blue-700 text-white">
             <tr>
@@ -69,7 +69,7 @@ const MyCampaigns = () => {
               <th className="py-3 px-4 text-left">Title</th>
               <th className="py-3 px-4 text-left">Type</th>
               <th className="py-3 px-4 text-left">Donation (BDT)</th>
-              <th className="py-3 px-4 text-left">Active Status</th>
+              <th className="py-3 px-4 text-left">Deadline</th>
               <th className="py-3 px-4 text-left">Actions</th>
             </tr>
           </thead>
@@ -114,7 +114,7 @@ const MyCampaigns = () => {
             You have no campaigns added yet.
           </p>
         </div>
-      )}
+      )}</> : <div className=" text-center text-blue-700"><span className="loading loading-dots loading-lg"></span></div>}
     </div>
   );
 };

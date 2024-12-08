@@ -3,9 +3,9 @@ import Campaign from "./Campaign";
 
 const ActiveCampaigns = () => {
   const [campaigns, setCampaigns] = useState([]);
-
+  
   useEffect(() => {
-    fetch("http://localhost:5000/campaigns")
+    fetch("http://localhost:5000/activeCampaigns", )
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
@@ -26,11 +26,11 @@ const ActiveCampaigns = () => {
         <p className="text-gray-500 dark:text-gray-400">Explore all of the campaigns added by users.</p>
       </div>
 
-        <div className="grid grid-cols-3 w-4/5 mx-auto gap-10 my-2">
+       {campaigns.length?  <div className="grid grid-cols-3 w-4/5 mx-auto gap-10 my-2">
         {
             activeCampaigns.map(campaign => <Campaign key={campaign._id} campaign={campaign}></Campaign>)
         }
-    </div>
+    </div> : <div className=" text-center text-blue-700"><span className="loading loading-dots loading-lg"></span></div>}
     </div>
   );
 };
