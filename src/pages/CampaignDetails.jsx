@@ -22,7 +22,7 @@ const CampaignDetails = () => {
     description,
     donationAmount,
     email: user.email,
-    name: user.name,
+    name: user.displayName,
     thumnailUrl,
     date,
   }
@@ -83,16 +83,16 @@ const CampaignDetails = () => {
               </p>
               <p className="font-semibold text-gray-700">
                 <span className="text-primary">Deadline:</span>{" "}
-                {new Date(date).toLocaleDateString()}
+                {new Date(date).toLocaleDateString()} {new Date() > new Date(date)? <span className="text-red-700">Deadline End</span>: ''}
               </p>
             </div>
           </div>
 
           <div className="text-center mt-6">
-            <button onClick={handleDonate} disabled={new Date() < new Date(date)? false: true} className="btn btn-primary px-8 py-3 rounded-full">
+            <button onClick={handleDonate} className="btn btn-primary px-8 py-3 rounded-full">
               Donate Now
             </button>
-            <p>{new Date() > new Date(date)? 'Campaign Inactive': ''}</p>
+            <p className="mt-5 text-yellow-600">{new Date() > new Date(date)? ' Warning: This Campaign is Inactive': ''}</p>
           </div>
         </div>
       </div>

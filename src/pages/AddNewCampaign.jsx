@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { AuthContext } from "../provider/AuthProvider";
 import { FiImage, FiType, FiDollarSign, FiCalendar, FiMail, FiUser, FiFileText } from "react-icons/fi";
+import Swal from "sweetalert2";
 
 const AddNewCampaign = () => {
   const { user } = useContext(AuthContext);
@@ -41,6 +42,13 @@ const AddNewCampaign = () => {
       .then((data) => {
         console.log(data);
         form.reset();
+        Swal.fire({
+          position: "middle-center",
+          icon: "success",
+          title: "Your work has been saved",
+          showConfirmButton: false,
+          timer: 1500
+        });
       });
   };
 
