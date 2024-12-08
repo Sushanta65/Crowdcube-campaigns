@@ -13,7 +13,7 @@ const Navbar = () => {
   }, [theme]);
 
   const toggleTheme = () => {
-    setTheme((previousheme) => (previousheme === "light" ? "dark" : "light"));
+    setTheme((prevTheme) => (prevTheme === "light" ? "dark" : "light"));
   };
 
   const links = (
@@ -22,25 +22,22 @@ const Navbar = () => {
         <Link to="/">Home</Link>
       </li>
       <li>
-        <Link to="/campaigns">All Campaign</Link>
+        <Link to="/campaigns">All Campaigns</Link>
       </li>
       <li>
         <Link to="/addNewCampaign">Add New Campaign</Link>
       </li>
       {user?.email && (
         <>
-          {" "}
           <li>
-            <Link to="/myCampaigns">My Campaign</Link>
+            <Link to="/myCampaigns">My Campaigns</Link>
           </li>
           <li>
             <Link to="/myDonations">My Donations</Link>
           </li>
         </>
       )}
-      {user ? (
-        <></>
-      ) : (
+      {!user && (
         <>
           <li>
             <Link to="/login">Login</Link>
@@ -50,14 +47,12 @@ const Navbar = () => {
           </li>
         </>
       )}
-
       <li>
         <button className="" onClick={toggleTheme}>
           {theme === "light" ? "Switch to Dark" : "Switch to Light"}
         </button>
       </li>
-
-      {user?.email ? (
+      {user?.email && (
         <li className="relative group z-50">
           <button className="cursor-pointer">User</button>
           <ul className="absolute left-0 top-8 hidden w-40 bg-base-100 p-2 shadow group-hover:block">
@@ -69,16 +64,15 @@ const Navbar = () => {
             </li>
           </ul>
         </li>
-      ) : (
-        <></>
       )}
     </>
   );
+
   return (
-    <div className="navbar bg-base-100 w-4/5 mx-auto">
+    <div className="navbar sticky top-0 z-50 bg-base-100 shadow-md">
       <div className="navbar-start">
         <div className="dropdown">
-          <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
+          <label tabIndex={0} className="btn btn-ghost lg:hidden">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-5 w-5"
@@ -93,15 +87,17 @@ const Navbar = () => {
                 d="M4 6h16M4 12h8m-8 6h16"
               />
             </svg>
-          </div>
+          </label>
           <ul
             tabIndex={0}
-            className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
+            className="menu menu-sm dropdown-content mt-3 z-[1] w-52 bg-base-100 rounded-box shadow"
           >
             {links}
           </ul>
         </div>
-        <a className="btn btn-ghost text-xl">Crowdcube</a>
+        <Link to="/" className="btn btn-ghost normal-case text-xl">
+          Crowdcube
+        </Link>
       </div>
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">{links}</ul>

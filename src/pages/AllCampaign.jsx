@@ -1,22 +1,31 @@
 import { useLoaderData } from "react-router-dom";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { AuthContext } from "../provider/AuthProvider";
 import { Link } from "react-router-dom";
 
 const AllCampaign = () => {
   const loadedCampaigns = useLoaderData();
-  const { campaigns, setCampaigns } = useContext(AuthContext);
 
+  const [campaigns, setCampaigns] = useState(loadedCampaigns)
   
-  setCampaigns(loadedCampaigns);
+  
 
+  const handleSortCampaign = () => {
+    const sortedCampaigns = [...campaigns].sort((a, b) => {
+      return a.donationAmount - b.donationAmount
+    })
+    setCampaigns(sortedCampaigns)
+  }
+  
   return (
     <div className="container mx-auto px-4 my-10">
       <div className="text-center mb-8">
         <h2 className="font-bold text-3xl pb-2">All Campaigns</h2>
         <p className="text-gray-500 dark:text-gray-400">Explore all of the campaigns added by users.</p>
       </div>
-
+      <div className="text-right py-5">
+        <button onClick={handleSortCampaign} className="btn btn-primary">Sort By Donation Cost</button>
+      </div>
       {campaigns.length? <div className="overflow-x-auto shadow-2xl">
         <table className="table w-full bg-transparent shadow-md rounded-lg">
           <thead className="bg-gradient-to-r from-blue-500 to-blue-700 text-white">

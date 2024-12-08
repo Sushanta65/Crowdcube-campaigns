@@ -25,7 +25,7 @@ const Testimonials = () => {
   
     return (
       <div className="bg-gray-100 dark:bg-gray-900 py-12">
-        <div className="container mx-auto text-center">
+        <div className="w-4/5 mx-auto text-center">
           <h2 className="text-3xl font-bold mb-4">What People Are Saying</h2>
           <p className="text-gray-600 dark:text-gray-400 mb-8">
             Hear from our campaign creators and donors about their experiences.
