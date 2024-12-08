@@ -1,11 +1,12 @@
 import { useContext } from "react";
 import { useLoaderData } from "react-router-dom";
 import { AuthContext } from "../provider/AuthProvider";
+import Swal from "sweetalert2";
 
 const CampaignDetails = () => {
   const campaign = useLoaderData();
-  console.log(campaign)
-  const {user} = useContext(AuthContext)
+  console.log(campaign);
+  const { user } = useContext(AuthContext);
   const {
     campaignTitle,
     campaignType,
@@ -26,20 +27,42 @@ const CampaignDetails = () => {
     name: user.displayName,
     thumnailUrl,
     date,
-  }
+  };
 
   const handleDonate = () => {
-   fetch('http://localhost:5000/myDonations', {
-    method: 'POST',
-    headers: {
-      'content-type': 'application/json'
-    },
-    body: JSON.stringify(donated)
-   })
-   .then(data => {
-    console.log(data)
-   })
-  }
+    fetch("http://localhost:5000/myDonations", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(donated),
+    }).then((data) => {
+      if (data.status === 200) {
+        let timerInterval;
+        Swal.fire({
+          title: "Congratulations!",
+          html: "You Made Donation Successfully.",
+          timer: 4000,
+          timerProgressBar: true,
+          didOpen: () => {
+            Swal.showLoading();
+            const timer = Swal.getPopup().querySelector("b");
+            timerInterval = setInterval(() => {
+              timer.textContent = `${Swal.getTimerLeft()}`;
+            }, 100);
+          },
+          willClose: () => {
+            clearInterval(timerInterval);
+          },
+        }).then((result) => {
+          /* Read more about handling dismissals below */
+          if (result.dismiss === Swal.DismissReason.timer) {
+            console.log("I was closed by the timer");
+          }
+        });
+      }
+    });
+  };
 
   return (
     <div className="container mx-auto p-6 md:p-12">
@@ -84,16 +107,28 @@ const CampaignDetails = () => {
               </p>
               <p className="font-semibold text-gray-700">
                 <span className="text-primary">Deadline:</span>{" "}
-                {new Date(date).toLocaleDateString()} {new Date() > new Date(date)? <span className="text-red-700">Deadline End</span>: ''}
+                {new Date(date).toLocaleDateString()}{" "}
+                {new Date() > new Date(date) ? (
+                  <span className="text-red-700">Deadline End</span>
+                ) : (
+                  ""
+                )}
               </p>
             </div>
           </div>
 
           <div className="text-center mt-6">
-            <button onClick={handleDonate} className="btn btn-primary px-8 py-3 rounded-full">
+            <button
+              onClick={handleDonate}
+              className="btn btn-primary px-8 py-3 rounded-full"
+            >
               Donate Now
             </button>
-            <p className="mt-5 text-yellow-600">{new Date() > new Date(date)? ' Warning: This Campaign is Inactive': ''}</p>
+            <p className="mt-5 text-yellow-600">
+              {new Date() > new Date(date)
+                ? " Warning: This Campaign is Inactive"
+                : ""}
+            </p>
           </div>
         </div>
       </div>

@@ -1,7 +1,16 @@
 import { useContext } from "react";
 import { useLoaderData } from "react-router-dom";
 import { AuthContext } from "../provider/AuthProvider";
-import { FiImage, FiType, FiDollarSign, FiCalendar, FiMail, FiUser, FiFileText } from "react-icons/fi";
+import {
+  FiImage,
+  FiType,
+  FiDollarSign,
+  FiCalendar,
+  FiMail,
+  FiUser,
+  FiFileText,
+} from "react-icons/fi";
+import Swal from "sweetalert2";
 
 const UpdateCampaign = () => {
   const campaign = useLoaderData();
@@ -17,7 +26,7 @@ const UpdateCampaign = () => {
     date,
   } = campaign;
 
-  console.log(campaign)
+  console.log(campaign);
 
   const handleUpdateCampaign = (event) => {
     event.preventDefault();
@@ -43,17 +52,39 @@ const UpdateCampaign = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log("Updated campaign:", data);
         form.reset();
+        console.log(data);
+        if (data.acknowledged) {
+          let timerInterval;
+          Swal.fire({
+            title: "Updated Successfully.",
+            html: "Well Done! You Update The Campaign!",
+            timer: 4000,
+            timerProgressBar: true,
+            didOpen: () => {
+              Swal.showLoading();
+              const timer = Swal.getPopup().querySelector("b");
+              timerInterval = setInterval(() => {
+                timer.textContent = `${Swal.getTimerLeft()}`;
+              }, 100);
+            },
+            willClose: () => {
+              clearInterval(timerInterval);
+            },
+          }).then((result) => {
+            /* Read more about handling dismissals below */
+            if (result.dismiss === Swal.DismissReason.timer) {
+              console.log("I was closed by the timer");
+            }
+          });
+        }
       });
   };
 
   return (
-    <div className="container mx-auto p-6">
+    <div className="container mx-auto p-6 mt-10">
       <div className="text-center mb-8">
-        <h2 className="font-bold text-3xl pb-2 ">
-          Update Campaign
-        </h2>
+        <h2 className="font-bold text-3xl pb-2 ">Update Campaign</h2>
         <p className="text-gray-500 dark:text-gray-400">
           Edit and update your campaign details.
         </p>
@@ -63,7 +94,6 @@ const UpdateCampaign = () => {
         onSubmit={handleUpdateCampaign}
         className="space-y-6 bg-base-100 p-6 rounded-lg shadow-lg"
       >
-       
         <div className="flex items-center gap-3">
           <FiImage className="text-xl text-primary" />
           <input
@@ -76,7 +106,6 @@ const UpdateCampaign = () => {
           />
         </div>
 
-       
         <div className="flex items-center gap-3">
           <FiType className="text-xl text-primary" />
           <input
@@ -89,7 +118,6 @@ const UpdateCampaign = () => {
           />
         </div>
 
-       
         <div className="flex items-center gap-3">
           <FiFileText className="text-xl text-primary" />
           <input
@@ -102,7 +130,6 @@ const UpdateCampaign = () => {
           />
         </div>
 
-       
         <div className="flex items-center gap-3">
           <FiFileText className="text-xl text-primary" />
           <textarea
@@ -115,7 +142,6 @@ const UpdateCampaign = () => {
           ></textarea>
         </div>
 
-        
         <div className="flex items-center gap-3">
           <FiDollarSign className="text-xl text-primary" />
           <input
@@ -128,7 +154,6 @@ const UpdateCampaign = () => {
           />
         </div>
 
-      
         <div className="flex items-center gap-3">
           <FiCalendar className="text-xl text-primary" />
           <input
@@ -140,7 +165,6 @@ const UpdateCampaign = () => {
           />
         </div>
 
-       
         <div className="flex items-center gap-3">
           <FiMail className="text-xl text-primary" />
           <input
@@ -152,7 +176,6 @@ const UpdateCampaign = () => {
           />
         </div>
 
-        
         <div className="flex items-center gap-3">
           <FiUser className="text-xl text-primary" />
           <input
@@ -164,7 +187,6 @@ const UpdateCampaign = () => {
           />
         </div>
 
-       
         <div>
           <button className="btn btn-primary w-full" type="submit">
             Update Campaign

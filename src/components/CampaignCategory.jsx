@@ -27,7 +27,7 @@ const CampaignCategories = () => {
     ];
   
     return (
-      <div className="bg-gray-50 dark:bg-gray-800 py-12">
+      <div className="light:bg-gray-100 dark:bg-gray-800 py-12">
         <div className="w-4/5 mx-auto text-center">
           <h2 className="text-3xl font-bold mb-4">Explore Campaign Categories</h2>
           <p className="text-gray-600 dark:text-gray-400 mb-8">

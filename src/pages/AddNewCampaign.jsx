@@ -45,15 +45,15 @@ const AddNewCampaign = () => {
         Swal.fire({
           position: "middle-center",
           icon: "success",
-          title: "Your work has been saved",
+          title: "Campaign Added Successfully.",
           showConfirmButton: false,
-          timer: 1500
+          timer: 3000
         });
       });
   };
 
   return (
-    <div className="container mx-auto p-6">
+    <div className="w-4/5 mx-auto p-6 mt-10">
       <div className="text-center mb-8">
         <h2 className="font-bold text-3xl pb-2">Add New Campaign</h2>
         <p className="text-gray-500 dark:text-gray-400">You can add a new campaign to help others.</p>
