@@ -27,7 +27,7 @@ const CampaignCategories = () => {
   ];
 
   return (
-    <div className=" dark:bg-green-900 pb-20 pt-20">
+    <div className=" dark:bg-green-900 pb-20 pt-10">
       <div className="w-4/5 mx-auto text-center">
         {/* Section Title */}
         <h2 className="text-4xl font-bold mb-4 text-green-700 dark:text-green-200">

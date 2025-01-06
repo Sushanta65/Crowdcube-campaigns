@@ -4,6 +4,7 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 
 import { Pagination, Navigation ,Autoplay} from 'swiper/modules';
+import { Link } from 'react-router-dom';
 
 const BannerSlider = () => {
   
@@ -32,7 +33,7 @@ const BannerSlider = () => {
   ];
 
   return (
-    <div>
+    <div className='-z-10'>
        <Swiper
         modules={[Navigation, Pagination, Autoplay]}
         autoplay={{ delay: 3000, disableOnInteraction: false }}
@@ -55,9 +56,9 @@ const BannerSlider = () => {
               <div className="text-center text-white z-10">
                 <h2 className="text-4xl md:text-5xl font-bold">{slide.title}</h2>
                 <p className="mt-4 text-lg md:text-xl">{slide.description}</p>
-                <button className="mt-6 btn btn-primary px-6 py-2">
+                <Link to='/campaigns' className="mt-6 btn btn-primary px-6 py-2">
                   Learn More
-                </button>
+                </Link>
               </div>
             </div>
           </SwiperSlide>

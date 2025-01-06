@@ -59,9 +59,9 @@ const AddNewCampaign = () => {
   };
 
   return (
-    <div className="w-4/5 mx-auto p-6 mt-10">
+    <div className="w-4/5 mx-auto mt-36 pb-10">
       <div className="text-center mb-8">
-        <h2 className="font-bold text-3xl pb-2 text-success">
+        <h2 className="font-bold text-3xl pb-2 text-green-600">
           Add New Campaign
         </h2>
         <p className="text-gray-500 dark:text-gray-400">

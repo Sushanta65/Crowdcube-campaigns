@@ -20,10 +20,10 @@ const AllCampaign = () => {
   };
 
   return (
-    <div className="container mx-auto px-4 my-16">
+    <div className="container mx-auto px-4 mb-8 mt-36">
       <div className="text-center mb-8">
         <h2 className="font-bold text-3xl pb-2 text-green-600">All Campaigns</h2>
-        <p className="text-gray-600">
+        <p className="00">
           Explore all of the campaigns added by users.
         </p>
       </div>
@@ -41,12 +41,12 @@ const AllCampaign = () => {
 
       {campaigns.length > 0 ? (
         <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {campaigns.map((campaign, index) => (
+          {campaigns.map((campaign) => (
             <div
               key={campaign._id}
               className=" p-6 rounded-lg shadow-lg hover:shadow-2xl transition-all duration-300"
             >
-              <h3 className="font-medium text-2xl text-gray-600 mb-2">{campaign.campaignTitle}</h3>
+              <h3 className="font-medium text-2xl mb-2">{campaign.campaignTitle}</h3>
               <p className="text-lg  mb-3">{campaign.campaignType}</p>
               <p className="text-lg text-green-700 font-semibold">
                 Donation Goal: <span className="text-xl">{campaign.donationAmount} BDT</span>

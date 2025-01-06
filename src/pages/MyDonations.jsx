@@ -17,8 +17,8 @@ const MyDonations = () => {
   }, [user?.email]);
 
   return (
-    <div className="my-10 w-4/5 mx-auto">
-      <div className="text-center mb-8">
+    <div className="mb-10 mt-36 w-4/5 mx-auto">
+      <div className="text-center mb-12">
         <h2 className="font-bold text-3xl pb-2 text-green-600 dark:text-green-400">
           My Donations
         </h2>

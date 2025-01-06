@@ -64,7 +64,7 @@ const UpdateCampaign = () => {
   };
 
   return (
-    <div className="container mx-auto p-6 mt-10">
+    <div className="container mx-auto mt-32">
       <div className="text-center mb-8">
         <h2 className="font-bold text-3xl pb-2 text-green-600">Update Campaign</h2>
         <p className="text-gray-600">

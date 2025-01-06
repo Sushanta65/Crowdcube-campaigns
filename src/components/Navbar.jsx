@@ -16,7 +16,7 @@ const Navbar = () => {
   const toggleTheme = () => {
     setTheme((prevTheme) => (prevTheme === "light" ? "dark" : "light"));
   };
-
+  
   const links = (
     <>
       <li>
@@ -119,7 +119,7 @@ const Navbar = () => {
   );
 
   return (
-    <div className="bg-success/10 shadow-md px-5">
+    <div className={`shadow-md px-5 fixed top-0 left-0 right-0 ${theme === 'dark'? 'bg-gray-800' : 'bg-white'} dark:bg-gray-800 z-10`}>
       <div className="navbar w-4/5 mx-auto">
         <div className="navbar-start">
           <div className="dropdown">
@@ -141,7 +141,7 @@ const Navbar = () => {
             </label>
             <ul
               tabIndex={0}
-              className="menu menu-sm dropdown-content mt-3 z-[1] w-52 bg-success/20 rounded-box shadow"
+              className="menu menu-sm dropdown-content mt-3 z-[1] w-52 bg-white rounded-box shadow"
             >
               {links}
             </ul>

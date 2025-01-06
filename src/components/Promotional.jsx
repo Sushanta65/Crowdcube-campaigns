@@ -1,6 +1,6 @@
 const Promotional = () => {
     return (
-      <div className="bg-gradient-to-r  py-16 my-20 w-4/5 mx-auto">
+      <div className="bg-gradient-to-r  pt-16 pb-24 mt-16  w-4/5 mx-auto">
         <div className="w-4/5 mx-auto text-center ">
           {/* Heading and Subheading */}
           <h2 className="text-4xl font-bold mb-4">
