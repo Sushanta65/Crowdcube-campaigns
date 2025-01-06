@@ -1,14 +1,22 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../provider/AuthProvider";
-import { Link, useLoaderData } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 import { FiEdit, FiTrash2 } from "react-icons/fi";
 
 const MyCampaigns = () => {
 
-  const loadedData = useLoaderData()
   const { user } = useContext(AuthContext);
-  const [myCampaigns, setMyCampaigns] = useState(loadedData.filter(campaign => campaign.email === user?.email));
+  const [myCampaigns, setMyCampaigns] = useState([]);
+
+
+  useEffect(() => {
+    fetch("https://crowdcube-server-wheat.vercel.app/campaigns")
+    .then(res => res.json())
+    .then(data => {
+      setMyCampaigns(data.filter(campaign => campaign?.email === user?.email))
+    })
+  }, [user?.email])
 
 
   const handleDelete = (id) => {

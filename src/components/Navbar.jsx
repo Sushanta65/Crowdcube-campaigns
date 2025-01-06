@@ -3,6 +3,7 @@ import { Link, NavLink } from "react-router-dom";
 import { AuthContext } from "../provider/AuthProvider";
 import { FaSun, FaMoon } from "react-icons/fa";
 
+
 const Navbar = () => {
   const { user, loggedOut } = useContext(AuthContext);
 
@@ -28,13 +29,16 @@ const Navbar = () => {
       <li>
         <NavLink to="/addNewCampaign">Add New Campaign</NavLink>
       </li>
+      <li>
+        <NavLink to='/aboutUs'>About Us</NavLink>
+      </li>
       {user?.email && (
         <>
           <li>
-            <NavLink to="/myCampaigns">My Campaigns</NavLink>
+            <NavLink to="myCampaigns">My Campaigns</NavLink>
           </li>
           <li>
-            <NavLink to="/myDonations">My Donations</NavLink>
+            <NavLink to="myDonations">My Donations</NavLink>
           </li>
         </>
       )}
@@ -52,7 +56,8 @@ const Navbar = () => {
   );
 
   return (
-    <div className="navbar sticky top-0 z-50 bg-base-100 shadow-md px-5">
+    <div className="bg-base-100 shadow-md px-5">
+      <div className="w-4/5 mx-auto navbar sticky top-0 z-50 ">
       <div className="navbar-start">
         <div className="dropdown">
           <label tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -111,12 +116,9 @@ const Navbar = () => {
               </li>
             </ul>
           </div>
-        ) : (
-          <Link to="/login" className="btn btn-primary">
-            Login
-          </Link>
-        )}
+        ) : ''}
       </div>
+    </div>
     </div>
   );
 };

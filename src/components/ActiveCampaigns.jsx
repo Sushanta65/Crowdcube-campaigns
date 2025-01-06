@@ -12,11 +12,13 @@ const ActiveCampaigns = () => {
         setCampaigns(data);
       });
   }, []);
+
+
   const activeCampaigns = campaigns.filter(
     (campaign) => new Date() < new Date(campaign.date)
   );
 
-  console.log(activeCampaigns);
+  console.log("active campaigns", activeCampaigns);
 
   return (
     <div className="my-20">

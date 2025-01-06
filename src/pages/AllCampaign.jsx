@@ -1,14 +1,18 @@
 import { useLoaderData } from "react-router-dom";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../provider/AuthProvider";
 import { Link } from "react-router-dom";
 
 const AllCampaign = () => {
-  const loadedCampaigns = useLoaderData();
-
-  const [campaigns, setCampaigns] = useState(loadedCampaigns)
+  const [campaigns, setCampaigns] = useState([])
   
-  
+  useEffect(() => {
+    fetch("https://crowdcube-server-wheat.vercel.app/campaigns")
+    .then(res => res.json())
+    .then(data => {
+      setCampaigns(data)
+    })
+  }, [])
 
   const handleSortCampaign = () => {
     const sortedCampaigns = [...campaigns].sort((a, b) => {

@@ -1,12 +1,8 @@
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Fade } from "react-awesome-reveal";
 
-// Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/pagination';
 
-
-// import required modules
 import { Pagination, Navigation ,Autoplay} from 'swiper/modules';
 
 const BannerSlider = () => {
@@ -68,9 +64,6 @@ const BannerSlider = () => {
         ))}
       </Swiper>
     
-      <Fade>
-  <p>I will gently appear as I enter the viewport</p>
-</Fade>
     
     </div>
   );
