@@ -3,10 +3,10 @@ import fundingImg from '../assets/crowdfunding.jpg'
 
 const AboutUs = () => {
   return (
-    <div className=" dark:bg-gray-900 py-10">
+    <div className=" dark:bg-gray-900 mt-16">
       <div className="container mx-auto px-6 lg:px-20">
-        <div className="text-center mb-10">
-          <h1 className="text-4xl font-bold  dark:text-gray-100">
+        <div className="text-center mb-10 ">
+          <h1 className="text-3xl font-bold  dark:text-gray-100">
             About Us
           </h1>
           <p className="mt-4  dark:text-gray-300">

@@ -3,7 +3,6 @@ import { Link, NavLink } from "react-router-dom";
 import { AuthContext } from "../provider/AuthProvider";
 import { FaSun, FaMoon } from "react-icons/fa";
 
-
 const Navbar = () => {
   const { user, loggedOut } = useContext(AuthContext);
 
@@ -21,34 +20,98 @@ const Navbar = () => {
   const links = (
     <>
       <li>
-        <NavLink to="/">Home</NavLink>
+        <NavLink
+          to="/"
+          className={({ isActive }) =>
+            isActive
+              ? "text-success font-semibold border-b-2 border-success"
+              : "hover:text-success"
+          }
+        >
+          Home
+        </NavLink>
       </li>
       <li>
-        <NavLink to="/campaigns">All Campaigns</NavLink>
+        <NavLink
+          to="/campaigns"
+          className={({ isActive }) =>
+            isActive
+              ? "text-success font-semibold border-b-2 border-success"
+              : "hover:text-success"
+          }
+        >
+          All Campaigns
+        </NavLink>
       </li>
       <li>
-        <NavLink to="/addNewCampaign">Add New Campaign</NavLink>
+        <NavLink
+          to="/addNewCampaign"
+          className={({ isActive }) =>
+            isActive
+              ? "text-success font-semibold border-b-2 border-success"
+              : "hover:text-success"
+          }
+        >
+          Add New Campaign
+        </NavLink>
       </li>
       <li>
-        <NavLink to='/aboutUs'>About Us</NavLink>
+        <NavLink
+          to="/aboutUs"
+          className={({ isActive }) =>
+            isActive
+              ? "text-success font-semibold border-b-2 border-success"
+              : "hover:text-success"
+          }
+        >
+          About Us
+        </NavLink>
       </li>
       {user?.email && (
         <>
           <li>
-            <NavLink to="myCampaigns">My Campaigns</NavLink>
+            <NavLink
+              to="/myCampaigns"
+              className={({ isActive }) =>
+                isActive
+                  ? "text-success font-semibold border-b-2 border-success"
+                  : "hover:text-success"
+              }
+            >
+              My Campaigns
+            </NavLink>
           </li>
           <li>
-            <NavLink to="myDonations">My Donations</NavLink>
+            <NavLink
+              to="/myDonations"
+              className={({ isActive }) =>
+                isActive
+                  ? "text-success font-semibold border-b-2 border-success"
+                  : "hover:text-success"
+              }
+            >
+              My Donations
+            </NavLink>
           </li>
         </>
       )}
       {!user && (
         <>
           <li>
-            <Link to="/login">Login</Link>
+            <NavLink
+              to="/login"
+              className="hover:text-success font-semibold"
+            >
+              Login
+            </NavLink>
           </li>
           <li>
-            <Link to="/signUp">Sign Up</Link>
+            <NavLink
+              to="/signUp"
+              className="hover:text-success font-semibold"
+            >
+              Sign Up
+            </NavLink>
           </li>
         </>
       )}
@@ -56,69 +119,76 @@ const Navbar = () => {
   );
 
   return (
-    <div className="bg-base-100 shadow-md px-5">
-      <div className="w-4/5 mx-auto navbar sticky top-0 z-50 ">
-      <div className="navbar-start">
-        <div className="dropdown">
-          <label tabIndex={0} className="btn btn-ghost lg:hidden">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-5 w-5"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
+    <div className="bg-success/10 shadow-md px-5">
+      <div className="navbar w-4/5 mx-auto">
+        <div className="navbar-start">
+          <div className="dropdown">
+            <label tabIndex={0} className="btn btn-ghost lg:hidden">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-5 w-5"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M4 6h16M4 12h8m-8 6h16"
+                />
+              </svg>
+            </label>
+            <ul
+              tabIndex={0}
+              className="menu menu-sm dropdown-content mt-3 z-[1] w-52 bg-success/20 rounded-box shadow"
             >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M4 6h16M4 12h8m-8 6h16"
-              />
-            </svg>
-          </label>
-          <ul
-            tabIndex={0}
-            className="menu menu-sm dropdown-content mt-3 z-[1] w-52 bg-base-100 rounded-box shadow"
-          >
-            {links}
-          </ul>
-        </div>
-        <Link to="/" className="btn btn-ghost normal-case text-xl font-bold">
-          Crowdcube
-        </Link>
-      </div>
-
-      <div className="navbar-center hidden lg:flex">
-        <ul className="menu menu-horizontal px-1">{links}</ul>
-      </div>
-
-      <div className="navbar-end flex items-center gap-3">
-
-        <button
-          onClick={toggleTheme}
-          className="btn btn-ghost text-xl text-primary-focus"
-        >
-          {theme === "light" ? <FaMoon /> : <FaSun />}
-        </button>
-        {user?.photoURL ? (
-          <div className="relative group">
-            <img
-              src={user.photoURL}
-              alt="User Profile"
-              className="w-10 h-10 rounded-full cursor-pointer border-2 border-primary"
-            />
-            <ul className="absolute right-0 hidden w-40 bg-base-100 rounded-lg shadow-lg group-hover:block">
-              <li className="px-4 py-2 border-b">{user.displayName}</li>
-              <li className="px-4 py-2">
-                <button onClick={loggedOut} className="btn btn-sm btn-error">
-                  Logout
-                </button>
-              </li>
+              {links}
             </ul>
           </div>
-        ) : ''}
+          <Link
+            to="/"
+            className="btn btn-ghost normal-case text-xl font-bold text-success"
+          >
+            Crowdcube
+          </Link>
+        </div>
+
+        <div className="navbar-center hidden lg:flex">
+          <ul className="menu menu-horizontal px-1">{links}</ul>
+        </div>
+
+        <div className="navbar-end flex items-center gap-3">
+          <button
+            onClick={toggleTheme}
+            className="btn btn-ghost text-xl text-success"
+          >
+            {theme === "light" ? <FaMoon /> : <FaSun />}
+          </button>
+          {user?.photoURL && (
+            <div className="relative group">
+              <img
+                src={user.photoURL}
+                alt="User Profile"
+                className="w-10 h-10 rounded-full cursor-pointer border-2 border-success"
+              />
+              <ul className="absolute right-0 hidden w-40 bg-base-100 rounded-lg shadow-lg group-hover:block">
+                <li className="px-4 py-2 border-b text-success font-semibold">
+                  {user.displayName}
+                </li>
+                <li className="px-4 py-2">
+                  <button
+                    onClick={loggedOut}
+                    className="btn btn-sm bg-error text-white"
+                  >
+                    Logout
+                  </button>
+                </li>
+              </ul>
+            </div>
+          )}
+        </div>
       </div>
-    </div>
     </div>
   );
 };

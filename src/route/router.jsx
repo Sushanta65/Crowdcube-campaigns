@@ -72,8 +72,6 @@ const router = createBrowserRouter([
             <MyDonations></MyDonations>
           </PrivateRoute>
         ),
-        loader: () =>
-          fetch("https://crowdcube-server-wheat.vercel.app/myDonations"),
       },
       {
         path: '/aboutUs',

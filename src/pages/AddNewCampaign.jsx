@@ -37,7 +37,6 @@ const AddNewCampaign = () => {
       email,
       name,
     };
-    console.log(campaign);
 
     fetch("https://crowdcube-server-wheat.vercel.app/campaigns", {
       method: "POST",
@@ -47,8 +46,7 @@ const AddNewCampaign = () => {
       body: JSON.stringify(campaign),
     })
       .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
+      .then(() => {
         form.reset();
         Swal.fire({
           position: "middle-center",
@@ -63,7 +61,9 @@ const AddNewCampaign = () => {
   return (
     <div className="w-4/5 mx-auto p-6 mt-10">
       <div className="text-center mb-8">
-        <h2 className="font-bold text-3xl pb-2">Add New Campaign</h2>
+        <h2 className="font-bold text-3xl pb-2 text-success">
+          Add New Campaign
+        </h2>
         <p className="text-gray-500 dark:text-gray-400">
           You can add a new campaign to help others.
         </p>
@@ -71,12 +71,12 @@ const AddNewCampaign = () => {
 
       <form
         onSubmit={handleAddCampaign}
-        className="space-y-6 bg-base-100 p-6 rounded-lg shadow-lg"
+        className="space-y-6 bg-base-100 p-6 rounded-lg shadow-lg border border-success"
       >
         <div className="flex items-center gap-3">
-          <FiImage className="text-xl text-primary" />
+          <FiImage className="text-xl text-success" />
           <input
-            className="input input-bordered w-full"
+            className="input input-bordered w-full focus:ring-success focus:border-success"
             required
             type="url"
             placeholder="Thumbnail URL"
@@ -85,9 +85,9 @@ const AddNewCampaign = () => {
         </div>
 
         <div className="flex items-center gap-3">
-          <FiType className="text-xl text-primary" />
+          <FiType className="text-xl text-success" />
           <input
-            className="input input-bordered w-full"
+            className="input input-bordered w-full focus:ring-success focus:border-success"
             required
             type="text"
             placeholder="Campaign Title"
@@ -96,9 +96,9 @@ const AddNewCampaign = () => {
         </div>
 
         <div className="flex items-center gap-3">
-          <FiFileText className="text-xl text-primary" />
+          <FiFileText className="text-xl text-success" />
           <input
-            className="input input-bordered w-full"
+            className="input input-bordered w-full focus:ring-success focus:border-success"
             required
             type="text"
             placeholder="Campaign Type (Personal, Startup, Business)"
@@ -107,9 +107,9 @@ const AddNewCampaign = () => {
         </div>
 
         <div className="flex items-center gap-3">
-          <FiFileText className="text-xl text-primary" />
+          <FiFileText className="text-xl text-success" />
           <textarea
-            className="textarea textarea-bordered w-full"
+            className="textarea textarea-bordered w-full focus:ring-success focus:border-success"
             required
             placeholder="Description"
             name="description"
@@ -117,9 +117,9 @@ const AddNewCampaign = () => {
         </div>
 
         <div className="flex items-center gap-3">
-          <FiDollarSign className="text-xl text-primary" />
+          <FiDollarSign className="text-xl text-success" />
           <input
-            className="input input-bordered w-full"
+            className="input input-bordered w-full focus:ring-success focus:border-success"
             required
             type="number"
             placeholder="Minimum Donation Amount"
@@ -128,9 +128,9 @@ const AddNewCampaign = () => {
         </div>
 
         <div className="flex items-center gap-3">
-          <FiCalendar className="text-xl text-primary" />
+          <FiCalendar className="text-xl text-success" />
           <input
-            className="input input-bordered w-full"
+            className="input input-bordered w-full focus:ring-success focus:border-success"
             required
             type="date"
             name="date"
@@ -138,9 +138,9 @@ const AddNewCampaign = () => {
         </div>
 
         <div className="flex items-center gap-3">
-          <FiMail className="text-xl text-primary" />
+          <FiMail className="text-xl text-success" />
           <input
-            className="input input-bordered w-full"
+            className="input input-bordered w-full "
             required
             type="email"
             value={user?.email}
@@ -150,9 +150,9 @@ const AddNewCampaign = () => {
         </div>
 
         <div className="flex items-center gap-3">
-          <FiUser className="text-xl text-primary" />
+          <FiUser className="text-xl text-success" />
           <input
-            className="input input-bordered w-full"
+            className="input input-bordered w-full "
             required
             type="text"
             value={user?.displayName}
@@ -162,7 +162,10 @@ const AddNewCampaign = () => {
         </div>
 
         <div>
-          <button className="btn btn-primary w-full" type="submit">
+          <button
+            className="btn btn-success w-full hover:bg-success-focus text-white"
+            type="submit"
+          >
             Add Campaign
           </button>
         </div>
