@@ -20,78 +20,60 @@ const AllCampaign = () => {
   };
 
   return (
-    <div className="container mx-auto px-4 my-10">
+    <div className="container mx-auto px-4 my-16">
       <div className="text-center mb-8">
-        <h2 className="font-bold text-3xl pb-2 text-success">
-          All Campaigns
-        </h2>
-        <p className="text-gray-500 dark:text-gray-400">
+        <h2 className="font-bold text-3xl pb-2 text-green-600">All Campaigns</h2>
+        <p className="text-gray-600">
           Explore all of the campaigns added by users.
         </p>
       </div>
+
       {campaigns.length > 0 && (
         <div className="text-right py-5">
           <button
             onClick={handleSortCampaign}
-            className="btn btn-sm bg-success text-white hover:bg-success-focus"
+            className="btn bg-green-600 text-white hover:bg-green-500 transition duration-300"
           >
             Sort By Donation Cost
           </button>
         </div>
       )}
-      {campaigns.length > 0 ? (
-        <div className="overflow-x-auto shadow-2xl">
-          <table className="table w-full bg-transparent shadow-md rounded-lg">
-            <thead className="bg-gradient-to-r from-green-500 to-green-700 text-white">
-              <tr>
-                <th className="py-3 px-4 text-left">#</th>
-                <th className="py-3 px-4 text-left">Title</th>
-                <th className="py-3 px-4 text-left">Type</th>
-                <th className="py-3 px-4 text-left">Donation (BDT)</th>
-                <th className="py-3 px-4 text-left">Active Status</th>
-                <th className="py-3 px-4 text-left">Actions</th>
-              </tr>
-            </thead>
 
-            <tbody className="dark:text-gray-200">
-              {campaigns?.map((campaign, index) => (
-                <tr
-                  key={campaign._id}
-                  className={`dark:hover:bg-gray-100 ${
-                    index % 2 === 0 ? "bg-transparent" : "bg-transparent"
+      {campaigns.length > 0 ? (
+        <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {campaigns.map((campaign, index) => (
+            <div
+              key={campaign._id}
+              className=" p-6 rounded-lg shadow-lg hover:shadow-2xl transition-all duration-300"
+            >
+              <h3 className="font-medium text-2xl text-gray-600 mb-2">{campaign.campaignTitle}</h3>
+              <p className="text-lg  mb-3">{campaign.campaignType}</p>
+              <p className="text-lg text-green-700 font-semibold">
+                Donation Goal: <span className="text-xl">{campaign.donationAmount} BDT</span>
+              </p>
+
+              <div className="mt-4">
+                <span
+                  className={`py-1 px-2 text-sm font-semibold rounded-full ${
+                    new Date() < new Date(campaign.date)
+                      ? "bg-green-300 text-green-600"
+                      : "bg-red-300 text-red-600"
                   }`}
                 >
-                  <td className="py-3 px-4">{index + 1}</td>
-                  <td className="py-3 px-4 font-medium">
-                    {campaign.campaignTitle}
-                  </td>
-                  <td className="py-3 px-4">{campaign.campaignType}</td>
-                  <td className="py-3 px-4">{campaign.donationAmount}</td>
-                  <td className="py-3 px-4">
-                    <span
-                      className={`py-1 px-2 rounded-xl ${
-                        new Date() < new Date(campaign.date)
-                          ? "text-green-600 bg-green-100"
-                          : "text-red-500 bg-red-100"
-                      }`}
-                    >
-                      {new Date() < new Date(campaign.date)
-                        ? "Active"
-                        : "Inactive"}
-                    </span>
-                  </td>
-                  <td className="py-3 px-4">
-                    <Link
-                      to={`/campaigns/${campaign._id}`}
-                      className="btn btn-sm bg-success text-white hover:bg-success-focus"
-                    >
-                      See More
-                    </Link>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+                  {new Date() < new Date(campaign.date) ? "Active" : "Inactive"}
+                </span>
+              </div>
+
+              <div className="mt-6 text-center">
+                <Link
+                  to={`/campaigns/${campaign._id}`}
+                  className="btn bg-green-600 text-white hover:bg-green-500 transition duration-300 py-2 px-4 rounded-lg"
+                >
+                  See More
+                </Link>
+              </div>
+            </div>
+          ))}
         </div>
       ) : (
         <div className="text-center text-green-700">

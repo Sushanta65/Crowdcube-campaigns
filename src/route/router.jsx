@@ -11,6 +11,7 @@ import UpdateCampaign from "../pages/UpdateCampaign";
 import HomeLayout from "../Layout/HomeLayout";
 import MyDonations from "../pages/MyDonations";
 import AboutUs from "../pages/AboutUs";
+import Page404 from "../pages/Page404";
 
 const router = createBrowserRouter([
   {
@@ -76,6 +77,10 @@ const router = createBrowserRouter([
       {
         path: '/aboutUs',
         element: <AboutUs />
+      },
+      {
+        path: '*',
+        element: <Page404 />
       }
     ],
   },

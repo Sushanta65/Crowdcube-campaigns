@@ -26,8 +26,6 @@ const UpdateCampaign = () => {
     date,
   } = campaign;
 
-  console.log(campaign);
-
   const handleUpdateCampaign = (event) => {
     event.preventDefault();
 
@@ -53,29 +51,13 @@ const UpdateCampaign = () => {
       .then((res) => res.json())
       .then((data) => {
         form.reset();
-        console.log(data);
         if (data.acknowledged) {
-          let timerInterval;
           Swal.fire({
             title: "Updated Successfully.",
-            html: "Well Done! You Update The Campaign!",
+            html: "Well Done! You updated the campaign!",
+            icon: "success",
             timer: 4000,
             timerProgressBar: true,
-            didOpen: () => {
-              Swal.showLoading();
-              const timer = Swal.getPopup().querySelector("b");
-              timerInterval = setInterval(() => {
-                timer.textContent = `${Swal.getTimerLeft()}`;
-              }, 100);
-            },
-            willClose: () => {
-              clearInterval(timerInterval);
-            },
-          }).then((result) => {
-            /* Read more about handling dismissals below */
-            if (result.dismiss === Swal.DismissReason.timer) {
-              console.log("I was closed by the timer");
-            }
           });
         }
       });
@@ -84,20 +66,20 @@ const UpdateCampaign = () => {
   return (
     <div className="container mx-auto p-6 mt-10">
       <div className="text-center mb-8">
-        <h2 className="font-bold text-3xl pb-2 ">Update Campaign</h2>
-        <p className="text-gray-500 dark:text-gray-400">
+        <h2 className="font-bold text-3xl pb-2 text-green-600">Update Campaign</h2>
+        <p className="text-gray-600">
           Edit and update your campaign details.
         </p>
       </div>
 
       <form
         onSubmit={handleUpdateCampaign}
-        className="space-y-6 bg-base-100 p-6 rounded-lg shadow-lg"
+        className="space-y-6  p-6 rounded-lg shadow-xl"
       >
         <div className="flex items-center gap-3">
-          <FiImage className="text-xl text-primary" />
+          <FiImage className="text-xl text-green-600" />
           <input
-            className="input input-bordered w-full"
+            className="input input-bordered w-full focus:ring-green-500"
             required
             type="url"
             defaultValue={thumnailUrl}
@@ -107,9 +89,9 @@ const UpdateCampaign = () => {
         </div>
 
         <div className="flex items-center gap-3">
-          <FiType className="text-xl text-primary" />
+          <FiType className="text-xl text-green-600" />
           <input
-            className="input input-bordered w-full"
+            className="input input-bordered w-full focus:ring-green-500"
             required
             type="text"
             defaultValue={campaignTitle}
@@ -119,9 +101,9 @@ const UpdateCampaign = () => {
         </div>
 
         <div className="flex items-center gap-3">
-          <FiFileText className="text-xl text-primary" />
+          <FiFileText className="text-xl text-green-600" />
           <input
-            className="input input-bordered w-full"
+            className="input input-bordered w-full focus:ring-green-500"
             required
             type="text"
             defaultValue={campaignType}
@@ -131,9 +113,9 @@ const UpdateCampaign = () => {
         </div>
 
         <div className="flex items-center gap-3">
-          <FiFileText className="text-xl text-primary" />
+          <FiFileText className="text-xl text-green-600" />
           <textarea
-            className="textarea textarea-bordered w-full"
+            className="textarea textarea-bordered w-full focus:ring-green-500"
             rows="4"
             required
             defaultValue={description}
@@ -143,9 +125,9 @@ const UpdateCampaign = () => {
         </div>
 
         <div className="flex items-center gap-3">
-          <FiDollarSign className="text-xl text-primary" />
+          <FiDollarSign className="text-xl text-green-600" />
           <input
-            className="input input-bordered w-full"
+            className="input input-bordered w-full focus:ring-green-500"
             required
             type="number"
             defaultValue={donationAmount}
@@ -155,9 +137,9 @@ const UpdateCampaign = () => {
         </div>
 
         <div className="flex items-center gap-3">
-          <FiCalendar className="text-xl text-primary" />
+          <FiCalendar className="text-xl text-green-600" />
           <input
-            className="input input-bordered w-full"
+            className="input input-bordered w-full focus:ring-green-500"
             required
             type="date"
             defaultValue={date}
@@ -166,9 +148,9 @@ const UpdateCampaign = () => {
         </div>
 
         <div className="flex items-center gap-3">
-          <FiMail className="text-xl text-primary" />
+          <FiMail className="text-xl text-green-600" />
           <input
-            className="input input-bordered w-full"
+            className="input input-bordered w-full focus:ring-green-500"
             type="email"
             value={user?.email}
             readOnly
@@ -177,9 +159,9 @@ const UpdateCampaign = () => {
         </div>
 
         <div className="flex items-center gap-3">
-          <FiUser className="text-xl text-primary" />
+          <FiUser className="text-xl text-green-600" />
           <input
-            className="input input-bordered w-full"
+            className="input input-bordered w-full focus:ring-green-500"
             type="text"
             value={user?.displayName}
             readOnly
@@ -188,7 +170,7 @@ const UpdateCampaign = () => {
         </div>
 
         <div>
-          <button className="btn btn-primary w-full" type="submit">
+          <button className="btn bg-green-600 text-white w-full hover:bg-green-700 focus:ring-green-500 transition duration-300">
             Update Campaign
           </button>
         </div>
