@@ -1,73 +1,87 @@
-import { useLoaderData } from "react-router-dom";
-import { useContext, useState } from "react";
-import { AuthContext } from "../provider/AuthProvider";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 const AllCampaign = () => {
-  const loadedCampaigns = useLoaderData();
+  const [campaigns, setCampaigns] = useState([]);
 
-  const [campaigns, setCampaigns] = useState(loadedCampaigns)
-  
-  
+  useEffect(() => {
+    fetch("https://crowdcube-server-wheat.vercel.app/campaigns")
+      .then((res) => res.json())
+      .then((data) => {
+        setCampaigns(data);
+      });
+  }, []);
 
   const handleSortCampaign = () => {
     const sortedCampaigns = [...campaigns].sort((a, b) => {
-      return a.donationAmount - b.donationAmount
-    })
-    setCampaigns(sortedCampaigns)
-  }
-  
-  return (
-    <div className="container mx-auto px-4 my-10">
-      <div className="text-center mb-8">
-        <h2 className="font-bold text-3xl pb-2">All Campaigns</h2>
-        <p className="text-gray-500 dark:text-gray-400">Explore all of the campaigns added by users.</p>
-      </div>
-      <div className="text-right py-5">
-        <button onClick={handleSortCampaign} className="btn btn-primary">Sort By Donation Cost</button>
-      </div>
-      {campaigns.length? <div className="overflow-x-auto shadow-2xl">
-        <table className="table w-full bg-transparent shadow-md rounded-lg">
-          <thead className="bg-gradient-to-r from-blue-500 to-blue-700 text-white">
-            <tr>
-              <th className="py-3 px-4 text-left">#</th>
-              <th className="py-3 px-4 text-left">Title</th>
-              <th className="py-3 px-4 text-left">Type</th>
-              <th className="py-3 px-4 text-left">Donation (BDT)</th>
-              <th className="py-3 px-4 text-left">Active Status</th>
-              <th className="py-3 px-4 text-left">Actions</th>
-            </tr>
-          </thead>
+      return a.donationAmount - b.donationAmount;
+    });
+    setCampaigns(sortedCampaigns);
+  };
 
-          <tbody className="dark:text-gray-200">
-            {campaigns?.map((campaign, index) => (
-              <tr
-                key={campaign._id}
-                className={` dark:hover:bg-gray-100 ${
-                  index % 2 === 0 ? "bg-transparent" : "bg-transparent"
-                }`}
-              >
-                <td className="py-3 px-4">{index + 1}</td>
-                <td className="py-3 px-4 font-medium">{campaign.campaignTitle}</td>
-                <td className="py-3 px-4">{campaign.campaignType}</td>
-                <td className="py-3 px-4">{campaign.donationAmount}</td>
-                <td className="py-3 px-4"><span className={new Date() < new Date(campaign.date)? 'bg-green-300 py-1 px-2 rounded-xl' : 'bg-red-300 py-1 px-2 rounded-xl'}>{new Date() < new Date(campaign.date)? 'Active':'Inactive'}</span></td>
-                <td className="py-3 px-4">
-                  <Link
-                    to={`/campaigns/${campaign._id}`}
-                    className="btn btn-primary"
-                  >
-                    See More
-                  </Link>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div> : <div className=" text-center text-blue-700"><span className="loading loading-dots loading-lg"></span></div>}
+  return (
+    <div className="container mx-auto px-4 mb-8 mt-36">
+      <div className="text-center mb-8">
+        <h2 className="font-bold text-3xl pb-2 text-green-600">All Campaigns</h2>
+        <p className="00">
+          Explore all of the campaigns added by users.
+        </p>
+      </div>
+
+      {campaigns.length > 0 && (
+        <div className="text-right py-5">
+          <button
+            onClick={handleSortCampaign}
+            className="btn bg-green-600 text-white hover:bg-green-500 transition duration-300"
+          >
+            Sort By Donation Cost
+          </button>
+        </div>
+      )}
+
+      {campaigns.length > 0 ? (
+        <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {campaigns.map((campaign) => (
+            <div
+              key={campaign._id}
+              className=" p-6 rounded-lg shadow-lg hover:shadow-2xl transition-all duration-300"
+            >
+              <h3 className="font-medium text-2xl mb-2">{campaign.campaignTitle}</h3>
+              <p className="text-lg  mb-3">{campaign.campaignType}</p>
+              <p className="text-lg text-green-700 font-semibold">
+                Donation Goal: <span className="text-xl">{campaign.donationAmount} BDT</span>
+              </p>
+
+              <div className="mt-4">
+                <span
+                  className={`py-1 px-2 text-sm font-semibold rounded-full ${
+                    new Date() < new Date(campaign.date)
+                      ? "bg-green-300 text-green-600"
+                      : "bg-red-300 text-red-600"
+                  }`}
+                >
+                  {new Date() < new Date(campaign.date) ? "Active" : "Inactive"}
+                </span>
+              </div>
+
+              <div className="mt-6 text-center">
+                <Link
+                  to={`/campaigns/${campaign._id}`}
+                  className="btn bg-green-600 text-white hover:bg-green-500 transition duration-300 py-2 px-4 rounded-lg"
+                >
+                  See More
+                </Link>
+              </div>
+            </div>
+          ))}
+        </div>
+      ) : (
+        <div className="text-center text-green-700">
+          <span className="loading loading-dots loading-lg"></span>
+        </div>
+      )}
     </div>
   );
 };
 
 export default AllCampaign;
-

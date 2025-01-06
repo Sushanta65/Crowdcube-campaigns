@@ -1,8 +1,8 @@
 
 const Loading = () => {
     return (
-        <div>
-            <h2>Loading....</h2>
+        <div className="text-center py-20 text-green-700">
+            <span className="loading loading-dots loading-lg"></span>
         </div>
     );
 };
