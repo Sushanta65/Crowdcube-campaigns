@@ -13,7 +13,6 @@ const ActiveCampaigns = () => {
       });
   }, []);
 
-
   const activeCampaigns = campaigns.filter(
     (campaign) => new Date() < new Date(campaign.date)
   );
@@ -22,21 +21,25 @@ const ActiveCampaigns = () => {
 
   return (
     <div className="my-20">
+      {/* Header Section */}
       <div className="text-center mb-8 pb-10">
-        <h2 className="font-bold text-3xl pb-2">Running Campaigns</h2>
-        <p className="text-gray-500 dark:text-gray-400">
-          Explore all of the campaigns added by users.
+        <h2 className="font-bold text-4xl text-green-700 dark:text-green-500 pb-2">
+          Running Campaigns
+        </h2>
+        <p className="text-gray-600 dark:text-gray-400 text-lg">
+          Explore all the campaigns currently running and added by users.
         </p>
       </div>
 
+      {/* Campaign Grid or Loading Indicator */}
       {campaigns.length ? (
-        <div className="grid grid-cols-3 w-4/5 mx-auto gap-10 my-2">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 w-4/5 mx-auto gap-8 my-4">
           {activeCampaigns.map((campaign) => (
             <Campaign key={campaign._id} campaign={campaign}></Campaign>
           ))}
         </div>
       ) : (
-        <div className=" text-center text-blue-700">
+        <div className="flex justify-center items-center text-green-700 dark:text-green-500">
           <span className="loading loading-dots loading-lg"></span>
         </div>
       )}
