@@ -58,3 +58,10 @@ This is a crowdfunding platform designed to help users raise funds for their pro
 #### Step 1: Clone the Repository  
 ```bash
 git clone https://github.com/your-username/crowdfunding-app.git
+
+#### Step 2: Navigate to the Project Directory  
+After cloning the repository, move into the project directory:  
+```bash
+cd crowdfunding-app
+
+
