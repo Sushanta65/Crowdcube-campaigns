@@ -3,13 +3,13 @@
 ### 🌟 **Project Overview**  
 This is a crowdfunding platform designed to help users raise funds for their projects and causes. The application features a user-friendly interface, secure payment methods, and easy project management tools.  
 
-**Live Link:** [Visit Crowdfunding Application](https://your-live-link.com)  
+**Live Link:** [Visit Crowdfunding Application]([https://your-live-link.com](https://crowdcube-bfdbf.web.app/))  
 **Technology Stack:** React, Node.js, Express, MongoDB, Tailwind CSS  
 
 ---
 
 ### 🖼️ **Screenshot**  
-![Crowdfunding Application Screenshot](https://via.placeholder.com/800x400)  
+![Crowdfunding Application Screenshot]([https://via.placeholder.com/800x400](https://i.ibb.co.com/gJJ1x4F/crowdcube.png))  
 (*Replace the placeholder image link with an actual screenshot of your app*)  
 
 ---
